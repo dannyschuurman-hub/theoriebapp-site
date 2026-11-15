@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://theorieb.example/sitemap.xml
