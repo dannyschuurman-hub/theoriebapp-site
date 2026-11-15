@@ -1,0 +1,13 @@
+# Theorie B
+
+> Theorie B is an iPhone app to practise for the Dutch car theory test (category B), in Dutch or English, with an explanation and a source for every answer. 225 original practice questions, mock test of 50 questions in 30 minutes, 44 correct needed. Independent of the CBR.
+
+## Pages
+
+- [Theorie B (Nederlands)](https://theorieb.example/): Oefen voor je theorie-examen auto met uitleg en bron bij elke vraag.
+- [Theorie B (English)](https://theorieb.example/en/): Practise for your Dutch car theory test with an explanation and a source for every question.
+- [Support (Nederlands)](https://theorieb.example/support/)
+- [Support (English)](https://theorieb.example/en/support/)
+- [Privacy (Nederlands)](https://theorieb.example/privacy/)
+- [Privacy (English)](https://theorieb.example/en/privacy/)
+- [App Store](https://apps.apple.com/nl/app/id6834047508)

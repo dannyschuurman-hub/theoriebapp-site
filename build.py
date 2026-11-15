@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Genereert alle pagina's. Run: python3 build.py"""
-import re, os, html
+import re, os, html, sys
 SRC = os.path.expanduser("~/Library/Mobile Documents/com~apple~CloudDocs/App-niches/03_theorie/appstore/web")
 STORE = "https://apps.apple.com/nl/app/id6834047508"
-BASE = "https://theorieb.example"  # vervang zodra het domein is gekozen
-FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">'
+BASE = sys.argv[1].rstrip("/") if len(sys.argv)>1 else "https://theorieb.example"  # python3 build.py https://domein.nl
+REAL = len(sys.argv)>1
+FONT = '<link rel="preload" href="/assets/fonts/inter-tight-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>'
 
 T = {
- "nl": dict(lang="nl", home="/", other="/en/", otherlab="English", sup="/support.html", pri="/privacy.html",
+ "nl": dict(lang="nl", home="/", other="/en/", otherlab="English", sup="/support/", pri="/privacy/", badge="appstore-nl.svg", store=STORE, badgealt="Download in de App Store",
   title="Theorie B: auto examen oefenen", desc="Oefen voor je theorie-examen auto en begrijp waarom een antwoord klopt, met uitleg en bron bij elke vraag. Proefexamen met 50 vragen in 30 minuten, in het Nederlands en Engels.",
   h1="Haal jij 44?", sub="Oefen voor je theorie-examen auto en begrijp waarom een antwoord klopt, met uitleg en bron bij elke vraag.",
   btn="Download in de App Store", chips=["Geen abonnement","Geen reclame","Ook in het Engels"], alt_hero="Theorie B uitslagscherm: 49 van 50 goed, grens van 44 gehaald",
@@ -17,8 +18,8 @@ T = {
         ("225 vragen, 9 onderwerpen","Oefen per onderwerp, in je eigen tempo. Je ziet je voortgang per onderwerp.","nl-05-onderwerpen.webp","Theorie B onderwerpenoverzicht met voortgang")],
   cta_h="Gratis proberen", cta_p="Gratis: één ronde van 10 oefenvragen en je eerste proefexamen, inclusief uitleg, fouten terugkijken en je scorekaart. Met één aankoop krijg je alle 225 vragen en kun je onbeperkt oefenen en proefexamens doen. Geen abonnement of advertenties. Een account of login is niet nodig.",
   price="Eenmalig € 7,99", privacy_line="Je voortgang blijft op je iPhone. Er worden geen gegevens verzameld.",
-  foot="Onafhankelijk van het CBR.", suplab="Support", prilab="Privacy", share="/assets/share-nl.jpg", hero="hero-nl.webp"),
- "en": dict(lang="en", home="/en/", other="/", otherlab="Nederlands", sup="/support-en.html", pri="/privacy-en.html",
+  foot="Onafhankelijk van het CBR.", suplab="Support", prilab="Privacy", share="/assets/share.jpg", shalt="Theorie B: Haal jij 44? Oefen voor je theorie-examen auto", hero="hero-nl.webp"),
+ "en": dict(lang="en", home="/en/", other="/", otherlab="Nederlands", sup="/en/support/", pri="/en/privacy/", badge="appstore-en.svg", store="https://apps.apple.com/app/id6834047508", badgealt="Download on the App Store",
   title="Theorie B: Dutch theory test", desc="Practise for your Dutch car theory test and understand each answer, with an explanation and a source for every question. Mock test with 50 questions in 30 minutes, in English or Dutch.",
   h1="Can you get 44?", sub="Practise for your Dutch car theory test and understand each answer, with an explanation and a source for every question.",
   btn="Download on the App Store", chips=["No subscription","No ads","Dutch or English"], alt_hero="Theorie B result screen: 49 out of 50 correct, the 44 pass mark reached",
@@ -28,7 +29,7 @@ T = {
         ("225 questions, 9 topics","Practise by topic, at your own pace. See your progress by topic.","en-05-onderwerpen.webp","Theorie B topic overview with progress")],
   cta_h="Try it free", cta_p="Free: one round of 10 practice questions and your first mock test, including explanations, mistake review and your scorecard. A one-off purchase gives you all 225 questions and unlimited practice and mock tests. There is no subscription or advertising. You do not need an account or login.",
   price="One-off € 7.99", privacy_line="Your progress stays on your iPhone. No data is collected.",
-  foot="Independent of the CBR.", suplab="Support", prilab="Privacy", share="/assets/share-en.jpg", hero="hero-en.webp"),
+  foot="Independent of the CBR.", suplab="Support", prilab="Privacy", share="/assets/share-en.jpg", shalt="Theorie B: Can you get 44? Dutch car theory test, in English", hero="hero-en.webp"),
 }
 
 def head(t, title, desc, path, alt_path, extra=""):
@@ -38,6 +39,8 @@ def head(t, title, desc, path, alt_path, extra=""):
 <html lang="{t['lang']}">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'">
+<meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
@@ -53,8 +56,10 @@ def head(t, title, desc, path, alt_path, extra=""):
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{BASE}{path}">
 <meta property="og:image" content="{BASE}{t['share']}">
+<meta property="og:image:alt" content="{html.escape(t['shalt'])}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:locale" content="{'nl_NL' if t['lang']=='nl' else 'en_GB'}">
+<meta property="og:locale:alternate" content="{'en_GB' if t['lang']=='nl' else 'nl_NL'}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -73,20 +78,20 @@ def foot(t):
 '''
 
 def home(t, path, alt):
-    ld = '{"@context":"https://schema.org","@type":"MobileApplication","name":"Theorie B","operatingSystem":"iOS","applicationCategory":"EducationalApplication","inLanguage":["nl","en"],"url":"%s%s","downloadUrl":"%s","description":%s}' % (BASE, path, STORE, '"%s"' % t['desc'].replace('"','\\"'))
+    ld = '{"@context":"https://schema.org","@type":"MobileApplication","name":"Theorie B","operatingSystem":"iOS","applicationCategory":"EducationalApplication","inLanguage":["nl","en"],"url":"%s%s","downloadUrl":"%s","description":%s}' % (BASE, path, t["store"], '"%s"' % t['desc'].replace('"','\\"'))
     s = head(t, t['title'], t['desc'], path, alt, f'<script type="application/ld+json">{ld}</script>\n')
     s += '<body class="home">\n<a class="skip" href="#main">Skip to content</a>\n'
     s += nav(t)
     s += f'''<main id="main">
 <section class="hero"><div class="hero-t"><h1>{t['h1']}</h1><p class="lead">{t['sub']}</p>
 <ul class="chips">{''.join(f'<li>{c}</li>' for c in t['chips'])}</ul>
-<p><a class="btn" href="{STORE}">{t['btn']}</a></p></div>
+<p><a class="badge" href="{t['store']}"><img src="/assets/{t['badge']}" width="150" height="50" alt="{t['badgealt']}"></a></p></div>
 <img class="hero-img" src="/assets/{t['hero']}" width="640" height="1354" alt="{t['alt_hero']}" fetchpriority="high"></section>
 '''
     for i,(h,p,img,alt) in enumerate(t['secs']):
         s += f'''<section class="row{' rev' if i%2 else ''}"><div class="row-t"><h2>{h}</h2><p>{p}</p></div><img src="/assets/{img}" width="640" height="1391" loading="lazy" alt="{alt}"></section>
 '''
-    s += f'''<section class="cta"><h2>{t['cta_h']}</h2><p>{t['cta_p']}</p><p class="price">{t['price']}</p><p><a class="btn dark" href="{STORE}">{t['btn']}</a></p><p class="small">{t['privacy_line']}</p></section>
+    s += f'''<section class="cta"><h2>{t['cta_h']}</h2><p>{t['cta_p']}</p><p class="price">{t['price']}</p><p><a class="badge" href="{t['store']}"><img src="/assets/{t['badge']}" width="150" height="50" alt="{t['badgealt']}"></a></p><p class="small">{t['privacy_line']}</p></section>
 </main>
 '''
     s += foot(t) + '</body>\n</html>\n'
@@ -100,10 +105,11 @@ def page(src, out, lang, other_out):
     body = re.search(r'<body><main>(.*)</main></body>', raw, re.S).group(1)
     # strip old brand bar, keep rest of text identical
     body = re.sub(r'<div class="merk">.*?</div>', '', body, count=1, flags=re.S)
-    body = body.replace('href="privacy.html"', 'href="/privacy.html"').replace('href="privacy-en.html"', 'href="/privacy-en.html"')
-    body = body.replace('href="support.html"', 'href="/support.html"').replace('href="support-en.html"', 'href="/support-en.html"')
-    path = "/" + out
-    alt = "/" + other_out
+    body = body.replace('href="privacy.html"', 'href="/privacy/"').replace('href="privacy-en.html"', 'href="/en/privacy/"')
+    body = body.replace('href="support.html"', 'href="/support/"').replace('href="support-en.html"', 'href="/en/support/"')
+    path = "/" + out.replace("index.html","")
+    alt = "/" + other_out.replace("index.html","")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
     s = head(t, title, title, path, alt)
     s += '<body class="doc">\n<a class="skip" href="#main">Skip to content</a>\n'
     s += nav(t, alt)
@@ -112,16 +118,40 @@ def page(src, out, lang, other_out):
 
 open("index.html","w").write(home(T["nl"], "/", "/en/"))
 open("en/index.html","w").write(home(T["en"], "/en/", "/"))
-page("klaar-voor-1.0.1/support.html","support.html","nl","support-en.html")
-page("klaar-voor-1.0.1/support-en.html","support-en.html","en","support.html")
-page("privacy.html","privacy.html","nl","privacy-en.html")
-page("privacy-en.html","privacy-en.html","en","privacy.html")
+page("klaar-voor-1.0.1/support.html","support/index.html","nl","en/support/index.html")
+page("klaar-voor-1.0.1/support-en.html","en/support/index.html","en","support/index.html")
+page("privacy.html","privacy/index.html","nl","en/privacy/index.html")
+page("privacy-en.html","en/privacy/index.html","en","privacy/index.html")
 
-pages = ["/","/en/","/support.html","/support-en.html","/privacy.html","/privacy-en.html"]
-pair = {"/":("/","/en/"),"/en/":("/","/en/"),"/support.html":("/support.html","/support-en.html"),"/support-en.html":("/support.html","/support-en.html"),"/privacy.html":("/privacy.html","/privacy-en.html"),"/privacy-en.html":("/privacy.html","/privacy-en.html")}
+pages = ["/","/en/","/support/","/en/support/","/privacy/","/en/privacy/"]
+pair = {"/":("/","/en/"),"/en/":("/","/en/"),"/support/":("/support/","/en/support/"),"/en/support/":("/support/","/en/support/"),"/privacy/":("/privacy/","/en/privacy/"),"/en/privacy/":("/privacy/","/en/privacy/")}
 x = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
 for p in pages:
     a,b = pair[p]
     x += f' <url><loc>{BASE}{p}</loc><xhtml:link rel="alternate" hreflang="nl" href="{BASE}{a}"/><xhtml:link rel="alternate" hreflang="en" href="{BASE}{b}"/><xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{a}"/></url>\n'
 open("sitemap.xml","w").write(x+'</urlset>\n')
 open("robots.txt","w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
+open(".nojekyll","w").write("")
+if REAL: open("CNAME","w").write(BASE.split("://")[-1]+"\n")
+
+n=T["nl"]; e=T["en"]
+doc = f"""{head(n,"Theorie B: pagina niet gevonden / page not found","Pagina niet gevonden. Page not found.","/404.html","/404.html")}<body class="doc">
+{nav(n)}<main id="main" class="doc-main"><h1>404</h1><p>Deze pagina bestaat niet. <a href="/">Terug naar Theorie B</a></p><p lang="en">This page does not exist. <a href="/en/">Back to Theorie B</a></p></main>
+{foot(n)}</body>
+</html>
+"""
+open("404.html","w").write(doc)
+open("llms.txt","w").write(f"""# Theorie B
+
+> Theorie B is an iPhone app to practise for the Dutch car theory test (category B), in Dutch or English, with an explanation and a source for every answer. 225 original practice questions, mock test of 50 questions in 30 minutes, 44 correct needed. Independent of the CBR.
+
+## Pages
+
+- [Theorie B (Nederlands)]({BASE}/): Oefen voor je theorie-examen auto met uitleg en bron bij elke vraag.
+- [Theorie B (English)]({BASE}/en/): Practise for your Dutch car theory test with an explanation and a source for every question.
+- [Support (Nederlands)]({BASE}/support/)
+- [Support (English)]({BASE}/en/support/)
+- [Privacy (Nederlands)]({BASE}/privacy/)
+- [Privacy (English)]({BASE}/en/privacy/)
+- [App Store]({STORE})
+""")
