@@ -4,10 +4,10 @@
 
 ## Pages
 
-- [Theorie B (Nederlands)](https://theorieb.example/): Oefen voor je theorie-examen auto met uitleg en bron bij elke vraag.
-- [Theorie B (English)](https://theorieb.example/en/): Practise for your Dutch car theory test with an explanation and a source for every question.
-- [Support (Nederlands)](https://theorieb.example/support/)
-- [Support (English)](https://theorieb.example/en/support/)
-- [Privacy (Nederlands)](https://theorieb.example/privacy/)
-- [Privacy (English)](https://theorieb.example/en/privacy/)
+- [Theorie B (Nederlands)](https://theoriebapp.nl/): Oefen voor je theorie-examen auto met uitleg en bron bij elke vraag.
+- [Theorie B (English)](https://theoriebapp.nl/en/): Practise for your Dutch car theory test with an explanation and a source for every question.
+- [Support (Nederlands)](https://theoriebapp.nl/support/)
+- [Support (English)](https://theoriebapp.nl/en/support/)
+- [Privacy (Nederlands)](https://theoriebapp.nl/privacy/)
+- [Privacy (English)](https://theoriebapp.nl/en/privacy/)
 - [App Store](https://apps.apple.com/nl/app/id6834047508)
