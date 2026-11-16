@@ -128,7 +128,7 @@ html.motion .flash{animation:th-flash linear both;animation-timeline:--hero;anim
 @keyframes th-title{from{transform:none}to{transform:translateY(42svh)}}
 @keyframes th-far{from{transform:none}to{transform:translateY(-6svh) scale(1.05)}}
 @keyframes th-near{from{transform:none}to{transform:translateY(9svh) scale(1.15)}}
-@keyframes th-green{0%,5%{opacity:1}22%,100%{opacity:0}}
+@keyframes th-green{0%,12%{opacity:1}12.5%,100%{opacity:0}}
 @keyframes th-scene{0%,53%{transform:none;animation-timing-function:cubic-bezier(.33,1,.68,1)}100%{transform:scale(2.4)}}
 @keyframes th-caption{0%,10%{opacity:1}35%,100%{opacity:0}}
 @keyframes th-phone-o{0%,35%{opacity:0}50%,100%{opacity:1}}
@@ -138,3 +138,6 @@ html.motion .flash{animation:th-flash linear both;animation-timeline:--hero;anim
 @keyframes th-flash{0%,85%{opacity:0}98%,100%{opacity:1}}
 /* De telefoon in de hero is beeld: geen eigen scrollvlak, anders kost zijn fade elk beeld een extra renderpas. */
 .hero-phone .home-content{overflow:hidden}
+@media(min-width:701px){.hero-title{width:auto;right:3%}.hero-title h1{font-size:clamp(82px,min(11vw,17.5svh),160px)}}
+@media(min-width:701px) and (max-height:500px){.hero-title{right:0}.hero-title h1{font-size:min(12.3vw,19svh)}}
+@media(min-width:701px) and (min-aspect-ratio:16/9.6){.hero-title{right:0}}

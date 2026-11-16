@@ -85,7 +85,7 @@
    heroPhone.style.opacity=range(h,.35,.5);
    heroPhone.style.transform=`translateY(${(1-ease(range(h,.35,.65)))*180}px) rotate(${-12*(1-range(h,.5,.8))}deg) scale(${1+range(h,.68,1)*18})`;
    flash.style.opacity=range(h,.85,.98);
-   greenLayer.style.opacity=1-range(h,.05,.22);
+   greenLayer.style.opacity=h<.12?1:0;
   }
   if(scrollY>bounds.exam.top-vh&&scrollY<bounds.exam.top+bounds.exam.length+vh) {
    const land=ease(range(p,0,.055));
