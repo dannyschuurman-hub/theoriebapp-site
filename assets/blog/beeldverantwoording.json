@@ -8,7 +8,14 @@
     "rechts-inhalen-in-de-file": "Verkeer op drie stroken, allemaal van camera af, nat asfalt.",
     "parkeerschijf-tijd-afronden": "Parkeerschijf op dashboard door voorruit, onleesbare tijd, blauwe lijn buiten.",
     "groot-licht-fietser-tegemoet": "Nachtweg met tegemoetkomende auto links in beeld, fietser rechts van camera af.",
-    "uitrit-verlaten-voetganger": "Wachtende auto achter trottoir, hardloper met gele jas."
+    "uitrit-verlaten-voetganger": "Wachtende auto achter trottoir, hardloper met gele jas.",
+    "wachten-in-auto-parkeren": "Stilstaande auto op nat asfalt langs een Nederlandse woonstraat bij blauw uur, gele paal als accent. Definitieve zijaanzicht-versie met alle wielen op de rijbaan.",
+    "minimale-profieldiepte-autobanden": "Close-up van een autoband en hoofdgroeven op nat asfalt, Nederlandse weg met geel reflectortje op de achtergrond.",
+    "fietser-van-rechts-voorrang": "Fietser in gele regenjas van rechts naar links bij een ongeregeld Nederlands kruispunt met verharde wegen.",
+    "mistachterlicht-bij-regen": "Achterhoek van een auto in zware regen op natte Nederlandse weg, gewone achterlichten aan, mistachterlicht uit.",
+    "rood-licht-op-voorrangsweg": "Rood verkeerslicht bij een leeg Nederlands kruispunt, nat asfalt bij blauw uur en geel accent van straatverlichting.",
+    "afrit-gemist-achteruitrijden": "Lege Nederlandse autosnelweg met afrit naar rechts, nat asfalt en gele reflector in zacht daglicht.",
+    "claxonneren-om-te-groeten": "Stuur en claxonvlak door zijruit van een auto aan een natte Nederlandse woonstraat, gele regenjas op bijrijdersstoel."
   },
   "sources": {
     "geel-verkeerslicht-stoppen": "ab08850b-f9bf-4021-bcae-d247113eaa06",
@@ -17,7 +24,24 @@
     "rechts-inhalen-in-de-file": "f2becc53-bdc4-4b9e-aa8a-51f2d4b80ad6",
     "parkeerschijf-tijd-afronden": "1857fe18-58c1-4d8f-a036-2d7732d611ab",
     "groot-licht-fietser-tegemoet": "24edb603-c399-4a46-a06f-20560d6d0382",
-    "uitrit-verlaten-voetganger": "f50aba56-8547-45c1-8681-8c08ca008401"
+    "uitrit-verlaten-voetganger": "f50aba56-8547-45c1-8681-8c08ca008401",
+    "wachten-in-auto-parkeren": "8f5f02d1-ebf1-4624-9640-079aaaa0413d",
+    "minimale-profieldiepte-autobanden": "e51738d3-ee25-4ab2-aa61-e0b3bf20f57f",
+    "fietser-van-rechts-voorrang": "37d7993b-54af-4437-9f35-f93b021dec52",
+    "mistachterlicht-bij-regen": "debe7511-633b-4774-9e5a-2064aafaa5ef",
+    "rood-licht-op-voorrangsweg": "0711a145-a54e-45b1-bc06-d69105b0d024",
+    "afrit-gemist-achteruitrijden": "a04262c2-3d78-4f08-8e88-f9689613409a",
+    "claxonneren-om-te-groeten": "125261f4-791f-412e-8ae0-3cc48b6bf54a"
   },
-  "review": "Alle zeven beelden visueel bekeken. Eerste nachtbeeld afgekeurd wegens verkeerde rijzijde; vervangen door correcte rijrichting. Conversie en uitsnede naar webformaten met Pillow."
+  "review": "Alle zeven beelden visueel bekeken. Eerste nachtbeeld afgekeurd wegens verkeerde rijzijde; vervangen door correcte rijrichting. Conversie en uitsnede naar webformaten met Pillow. Artikelen 08 t/m 14: alle zeven definitieve beelden visueel bekeken. Parkeerbeeld tweemaal vervangen wegens plaatsing op het trottoir. Fietsbeeld vervangen wegens verkeerde rijrichting. Definitieve versies gecontroleerd op wielen, handen, belijning, borden, gezichten, kentekens en overlap. Cover- en OG-uitsneden gecontroleerd; conversie met Pillow.",
+  "prompts": {
+    "wachten-in-auto-parkeren": "Wide 16:9 editorial photograph. Single stationary charcoal hatchback in strict side view, all tires on continuous wet asphalt in a roadside parking bay. Sidewalk and curb behind car, no curb in front of wheels. Dutch residential brick houses, blue hour, yellow bollard, reflective dark windows, no people. Front and rear ends cropped to hide plates. Realistic body and wheels, generous upper-left sky. No text, readable signs, logos, license plates, faces or phones.",
+    "minimale-profieldiepte-autobanden": "Editorial close photo at ground level of a single realistic front car wheel with black rubber tire and coherent deep tread grooves, stationary on wet asphalt beside Dutch street. Cropped car body so no plates visible. Soft yellow curbside reflector blurred in background. No hands, no measurement tools.",
+    "fietser-van-rechts-voorrang": "Wide 16:9 editorial photo. One cyclist in signal-yellow raincoat arriving from street on right, travelling leftward into a quiet equal-priority Dutch residential intersection. Distant side profile, face hidden by hood, bike pointing left, coherent wheels and anatomy. No cars. Four coherent asphalt street approaches, raised sidewalks, no markings, signs or lights. Dutch brick houses and trees, wet asphalt, soft daylight, calm negative space upper left. No text, plates, recognizable faces or watermarks.",
+    "mistachterlicht-bij-regen": "Editorial photo from sidewalk of one charcoal hatchback in heavy rain on a Dutch street, rear three-quarter view, distant rainy trees, ordinary dim red tail lights only, rear fog light OFF. Small yellow roadside reflector. License plate entirely outside crop, focus on rear corner of car and falling rain.",
+    "rood-licht-op-voorrangsweg": "Minimal editorial photo of a quiet Dutch intersection at blue hour, one realistic Dutch traffic light on right showing RED in top lens, lower lenses dark. Wet asphalt and soft yellow accent reflected from nearby street light. NO priority-road sign or other road signs in image. No cars or people. Coherent stop line across foreground lane.",
+    "afrit-gemist-achteruitrijden": "Wide calm editorial photo looking forward from safe roadside across a Dutch motorway exit diverging to the right, coherent clean lane markings and a wide hard shoulder, no traffic at all, no road signs, small yellow roadside reflector in right foreground, soft daylight on wet asphalt. No text or arrows painted on road. Accurate straightforward road geometry.",
+    "claxonneren-om-te-groeten": "Editorial photograph from outside looking obliquely through side window of a stationary car beside a Dutch residential street. Focus on a realistic plain unbranded steering wheel and horn pad; no hands, no people, no instruments readable, no screens. Wet window edge, yellow rain jacket folded on passenger seat, blurred Dutch brick houses outside. Calm blue-hour atmosphere."
+  },
+  "prompt_style_08_14": "photorealistic-natural; landscape 16:9 editorial driving-education cover; authentic Netherlands; wet asphalt; blue hour or soft overcast daylight; cinematic and quiet; signal-yellow accent; generous negative space; no text, readable signs, license plates, recognizable faces or screen content; physically coherent vehicles, wheels and road geometry."
 }
