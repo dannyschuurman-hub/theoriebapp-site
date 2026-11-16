@@ -5,10 +5,10 @@ import blog
 
 def nav(t, other_href=None):
  en=t['lang']=='en'
- return f'''<header class="mag-nav"><a class="brand" href="{t['home']}"><img src="/assets/icon-192.webp" width="34" height="34" alt="">Theorie B</a><nav aria-label="{'Main navigation' if en else 'Hoofdnavigatie'}"><a href="/blog/">Magazine</a><a class="lang" href="{other_href or t['other']}" lang="{'nl' if en else 'en'}">{t['otherlab']}</a><a class="nav-app" href="{t['store']}">{'Practise in the app' if en else 'Oefen in de app'} ↗</a></nav></header>'''
+ return f'''<header class="mag-nav"><a class="brand" href="{t['home']}"><img src="/assets/icon-192.webp" width="34" height="34" alt="">Theorie B</a><nav aria-label="{'Main navigation' if en else 'Hoofdnavigatie'}"><a href="{'/en/blog/' if en else '/blog/'}">Magazine</a><a class="lang" href="{other_href or t['other']}" lang="{'nl' if en else 'en'}">{t['otherlab']}</a><a class="nav-app" href="{t['store']}">{'Practise in the app' if en else 'Oefen in de app'} ↗</a></nav></header>'''
 
 def foot(t):
- return f'''<footer class="mag-footer"><a class="footer-word" href="{t['home']}">Theorie B<span>↗</span></a><div><p>{'Understand the rules. Pay attention to the road.' if t['lang']=='en' else 'Verkeersregels begrijpen. Met aandacht voor de weg.'}</p><p>{t['foot']}</p></div><nav aria-label="Footer"><a href="/blog/">Magazine</a><a href="{t['sup']}">Support</a><a href="{t['pri']}">Privacy</a><a href="/blog/feed.xml">RSS</a></nav></footer>'''
+ return f'''<footer class="mag-footer"><a class="footer-word" href="{t['home']}">Theorie B<span>↗</span></a><div><p>{'Understand the rules. Pay attention to the road.' if t['lang']=='en' else 'Verkeersregels begrijpen. Met aandacht voor de weg.'}</p><p>{t['foot']}</p></div><nav aria-label="Footer"><a href="{'/en/blog/' if t['lang']=='en' else '/blog/'}">Magazine</a><a href="{t['sup']}">Support</a><a href="{t['pri']}">Privacy</a><a href="{'/en/blog/feed.xml' if t['lang']=='en' else '/blog/feed.xml'}">RSS</a></nav></footer>'''
 
 def assets():
  dest=Path('assets/home');dest.mkdir(exist_ok=True)
@@ -47,7 +47,7 @@ def render(t,path,alt,head,blogs):
  cards=''
  if blogs:
   cards=blog.card(blogs[0],True)+'<div class="card-grid">'+''.join(blog.card(b) for b in blogs[1:4])+'</div>'
- magazine='<section class="home-magazine wrap"><p class="kicker">'+('THE MAGAZINE · ARTICLES IN DUTCH' if t['lang']=='en' else 'VOOR DAT ENE TWIJFELMOMENT')+'</p><h2>'+('Understand the road.' if t['lang']=='en' else 'Verkeersregels uitgelegd.')+'</h2>'+cards+'<a class="text-link" href="/blog/">'+('Explore the magazine' if t['lang']=='en' else 'Naar het magazine')+' ↗</a></section>'
+ magazine='<section class="home-magazine wrap"><p class="kicker">'+('FOR THAT MOMENT OF DOUBT' if t['lang']=='en' else 'VOOR DAT ENE TWIJFELMOMENT')+'</p><h2>'+('Understand the road.' if t['lang']=='en' else 'Verkeersregels uitgelegd.')+'</h2>'+cards+'<a class="text-link" href="'+('/en/blog/' if t['lang']=='en' else '/blog/')+'">'+('Explore the magazine' if t['lang']=='en' else 'Naar het magazine')+' ↗</a></section>'
  s=s.replace('/assets/home/appstore-en.svg','/assets/appstore-en.svg').replace('/assets/home/appstore-nl.svg','/assets/appstore-nl.svg')
  s=s.replace('{{MAGAZINE}}',magazine).replace('{{HEADER}}',nav(t)).replace('{{FOOTER}}',foot(t))
  ld={'@context':'https://schema.org','@type':'MobileApplication','name':'Theorie B','operatingSystem':'iOS','applicationCategory':'EducationalApplication','inLanguage':['nl','en'],'url':path,'downloadUrl':t['store'],'description':t['desc']}

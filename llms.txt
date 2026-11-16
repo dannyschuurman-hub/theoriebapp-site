@@ -11,9 +11,10 @@
 - [Privacy (Nederlands)](https://theoriebapp.nl/privacy/)
 - [Privacy (English)](https://theoriebapp.nl/en/privacy/)
 - [Verkeersregels uitgelegd (Nederlands)](https://theoriebapp.nl/blog/): korte uitleg per verkeersregel met wetsartikel en oefenvraag.
+- [Dutch traffic rules explained (English)](https://theoriebapp.nl/en/blog/): short explanations of Dutch traffic rules for the car theory test, with the law article and a practice question.
 - [App Store](https://apps.apple.com/nl/app/id6834047508)
 
-## Magazine
+## Magazine (Nederlands)
 
 - [Gebruik van de weg](https://theoriebapp.nl/blog/onderwerp/gebruik-van-de-weg/)
 - [Voorrang en voor laten gaan](https://theoriebapp.nl/blog/onderwerp/voorrang/)
@@ -28,3 +29,19 @@
 - [Geel verkeerslicht: stoppen of doorrijden?](https://theoriebapp.nl/blog/geel-verkeerslicht-stoppen/): Geel betekent stoppen. Alleen als veilig stoppen redelijkerwijs niet meer kan, mag je doorrijden. Kun je veilig vóór de stopstreep stoppen, dan stop je.
 - [Groot licht bij een fietser: wanneer dimmen?](https://theoriebapp.nl/blog/groot-licht-fietser-tegemoet/): Bij het tegenkomen van een andere weggebruiker mag je geen groot licht voeren. Een fietser is ook een weggebruiker, dus je schakelt over op dimlicht.
 - [Uitrit verlaten: moet een voetganger eerst?](https://theoriebapp.nl/blog/uitrit-verlaten-voetganger/): Bij het verlaten van een uitrit laat je al het overige verkeer voorgaan. Dat geldt ook voor een hardloper op het trottoir.
+
+## Magazine (English)
+
+- [Using the road](https://theoriebapp.nl/en/blog/topic/using-the-road/)
+- [Priority and giving way](https://theoriebapp.nl/en/blog/topic/priority-and-giving-way/)
+- [Special roads and manoeuvres](https://theoriebapp.nl/en/blog/topic/special-roads-and-manoeuvres/)
+- [Safe driving and emergencies](https://theoriebapp.nl/en/blog/topic/safe-driving-and-emergencies/)
+- [Traffic signs](https://theoriebapp.nl/en/blog/topic/traffic-signs/)
+- [Responsible driving](https://theoriebapp.nl/en/blog/topic/responsible-driving/)
+- [Can you hold your phone for navigation while driving?](https://theoriebapp.nl/en/blog/holding-phone-for-navigation/): You must not hold a mobile electronic device while driving, even to check directions. The rule applies whether you are making a call, reading a message or checking a map.
+- [Turning right: does the cyclist beside you go first?](https://theoriebapp.nl/en/blog/turning-right-cyclist-going-straight/): If you are travelling on the same road, let the cyclist go first. You are turning while the cyclist continues straight ahead. Using your indicator does not change the order.
+- [Can you pass on the right in queuing traffic?](https://theoriebapp.nl/en/blog/passing-on-right-in-queues/): In queuing traffic, you may pass a queue on the right. You do not have to stay behind the car to your left when your lane is moving faster.
+- [How to round up the time on a blue parking disc](https://theoriebapp.nl/en/blog/setting-parking-disc-time/): You may round your arrival time up to the next hour or half-hour. If you arrive at 10:10, that means 10:30. You cannot choose any later time you like.
+- [Amber traffic lights: should you stop or keep going?](https://theoriebapp.nl/en/blog/amber-light-stop-or-go/): Amber means stop. You may continue only if you can no longer reasonably stop safely. If you can stop safely before the stop line, you must do so.
+- [When should you dip your headlights for a cyclist?](https://theoriebapp.nl/en/blog/dipping-headlights-for-cyclists/): You must not use full beam when meeting another road user. A cyclist is a road user too, so switch to dipped headlights.
+- [Leaving a driveway: do pedestrians go first?](https://theoriebapp.nl/en/blog/leaving-driveway-pedestrians/): When leaving a driveway, let all other traffic go first. That includes a runner on the pavement.

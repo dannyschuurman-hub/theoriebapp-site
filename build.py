@@ -77,7 +77,7 @@ def foot(t):
     return home_v2.foot(t)
 
 def home(t, path, alt):
-    return home_v2.render(t, path, alt, head, BLOGS)
+    return home_v2.render(t, path, alt, head, blog.lees(t["lang"]) or BLOGS)
 
 DOC_TITLE = {"support/index.html": "Hulp en veelgestelde vragen | Theorie B", "en/support/index.html": "Help and FAQ | Theorie B", "privacy/index.html": "Privacybeleid | Theorie B", "en/privacy/index.html": "Privacy policy | Theorie B"}
 DOC_META = {"support/index.html": "Hulp nodig met Theorie B op je iPhone? Vind antwoorden op vragen over de app, lees hoe je je aankoop herstelt of neem contact op voor hulp.", "en/support/index.html": "Need help with Theorie B on your iPhone? Find answers to questions about the app, learn how to restore your purchase or contact us for support.", "privacy/index.html": "Lees hoe Theorie B met je privacy omgaat. Je hebt geen account nodig, je wordt niet gevolgd en je voortgang blijft op je eigen iPhone staan.", "en/privacy/index.html": "Read how Theorie B handles your privacy. You don't need an account, there's no tracking, and your practice progress stays on your own iPhone."}
@@ -145,6 +145,7 @@ Path('llms.txt').write_text(f"""# Theorie B
 - [Privacy (Nederlands)]({BASE}/privacy/)
 - [Privacy (English)]({BASE}/en/privacy/)
 - [Verkeersregels uitgelegd (Nederlands)]({BASE}/blog/): korte uitleg per verkeersregel met wetsartikel en oefenvraag.
+- [Dutch traffic rules explained (English)]({BASE}/en/blog/): short explanations of Dutch traffic rules for the car theory test, with the law article and a practice question.
 - [App Store]({STORE})
 """)
 

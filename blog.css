@@ -21,3 +21,7 @@
 @media(max-width:480px){.mag-nav nav a{padding-inline:6px;font-size:13px}.mag-nav nav a:last-child{padding-inline:12px}.mag-nav .brand{font-size:17px}.mag-nav .brand img{width:28px;height:28px}}
 .mag-nav nav>a:first-child{line-height:44px}
 @media(max-width:400px){.mag-nav nav>a:first-child{display:none}}
+
+/* Keep clamped card intros inside their own box, clear of the metadata. */
+.card .intro{max-height:3.3em}
+.card.featured .intro{max-height:4.95em;flex-shrink:0}

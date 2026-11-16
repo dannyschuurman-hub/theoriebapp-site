@@ -11,7 +11,7 @@ document.querySelectorAll('.quiz').forEach(quiz => {
       if (!correct) quiz.querySelector('[data-correct="true"]').classList.add('is-correct');
       feedback.hidden = false;
       feedback.classList.toggle('wrong', !correct);
-      feedback.querySelector('.verdict').textContent = correct ? 'Goed gezien.' : 'Nog niet goed. Dit is de regel:';
+      feedback.querySelector('.verdict').textContent = correct ? (quiz.dataset.goed || 'Goed gezien.') : (quiz.dataset.fout || 'Nog niet goed. Dit is de regel:');
     });
   });
 });
