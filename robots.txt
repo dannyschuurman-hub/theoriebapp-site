@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /_v2/
+Disallow: /tests/
 Sitemap: https://theoriebapp.nl/sitemap.xml

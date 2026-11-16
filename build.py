@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Genereert alle pagina's. Run: python3 build.py"""
 import re, os, html, sys
+import home_v2
+from pathlib import Path
 SRC = os.path.expanduser("~/Library/Mobile Documents/com~apple~CloudDocs/App-niches/03_theorie/appstore/web")
 STORE = "https://apps.apple.com/nl/app/id6834047508"
 BASE = sys.argv[1].rstrip("/") if len(sys.argv)>1 else "https://theorieb.example"  # python3 build.py https://domein.nl
-REAL = len(sys.argv)>1
 FONT = '<link rel="preload" href="/assets/fonts/inter-tight-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>'
 
 T = {
  "nl": dict(lang="nl", home="/", other="/en/", otherlab="English", sup="/support/", pri="/privacy/", badge="appstore-nl.svg", store=STORE, badgealt="Download in de App Store",
-  title="Theorie B: auto examen oefenen", desc="Oefen voor je theorie-examen auto en begrijp waarom een antwoord klopt, met uitleg en bron bij elke vraag. Proefexamen met 50 vragen in 30 minuten, in het Nederlands en Engels.",
+  title="Theorie B: auto examen oefenen", desc="Oefen voor je theorie-examen auto met Theorie B op je iPhone. Krijg 225 eigen oefenvragen met uitleg. Probeer gratis 10 vragen en je eerste proefexamen.",
   h1="Haal jij 44?", sub="Oefen voor je theorie-examen auto en begrijp waarom een antwoord klopt, met uitleg en bron bij elke vraag.",
   btn="Download in de App Store", chips=["Geen abonnement","Geen reclame","Ook in het Engels"], alt_hero="Theorie B uitslagscherm: 49 van 50 goed, grens van 44 gehaald",
   secs=[("Oefen met uitleg","225 zelfgeschreven oefenvragen op basis van de Nederlandse verkeerswetten, in 9 onderwerpen met elk 25 vragen. Bij elk antwoord staat uitleg met een wetsverwijzing, zoals RVV 1990, art. 15 lid 1.","nl-02-uitleg.webp","Theorie B toont een goed antwoord met uitleg en bron"),
@@ -20,7 +21,7 @@ T = {
   price="Eenmalig € 7,99", privacy_line="Je voortgang blijft op je iPhone. Er worden geen gegevens verzameld.",
   foot="Onafhankelijk van het CBR.", suplab="Support", prilab="Privacy", share="/assets/share.jpg", shalt="Theorie B: Haal jij 44? Oefen voor je theorie-examen auto", hero="hero-nl.webp"),
  "en": dict(lang="en", home="/en/", other="/", otherlab="Nederlands", sup="/en/support/", pri="/en/privacy/", badge="appstore-en.svg", store="https://apps.apple.com/app/id6834047508", badgealt="Download on the App Store",
-  title="Theorie B: Dutch theory test", desc="Practise for your Dutch car theory test and understand each answer, with an explanation and a source for every question. Mock test with 50 questions in 30 minutes, in English or Dutch.",
+  title="Theorie B: Dutch theory test", desc="Study for your car theory test with Theorie B on iPhone. Get 225 practice questions with explanations. Try 10 questions and your first mock test free.",
   h1="Can you get 44?", sub="Practise for your Dutch car theory test and understand each answer, with an explanation and a source for every question.",
   btn="Download on the App Store", chips=["No subscription","No ads","Dutch or English"], alt_hero="Theorie B result screen: 49 out of 50 correct, the 44 pass mark reached",
   secs=[("Know why","225 questions written by the maker, based on Dutch traffic law, in 9 topics with 25 questions each. Every answer includes an explanation and a source, such as RVV 1990, art. 15 lid 1.","en-02-uitleg.webp","Theorie B shows a correct answer with an explanation and source"),
@@ -42,7 +43,7 @@ def head(t, title, desc, path, alt_path, extra="", ogtype="website"):
 <html lang="{t['lang']}">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -65,44 +66,25 @@ def head(t, title, desc, path, alt_path, extra="", ogtype="website"):
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 {FONT}
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
 {extra}</head>
 '''
 
 def nav(t, other_href=None):
-    return f'''<header class="top"><a class="brand" href="{t['home']}"><img src="/assets/icon-192.webp" width="32" height="32" alt="" ><span>Theorie B</span></a>
-<a class="lang" href="{other_href or t['other']}" lang="{'en' if t['lang']=='nl' else 'nl'}">{t['otherlab']}</a></header>
-'''
+    return home_v2.nav(t, other_href)
 
 def foot(t):
-    return f'''<footer class="foot"><p>{t['foot']}</p><nav aria-label="Footer">{'<a href="/blog/">Verkeersregels uitgelegd</a>' if t['lang']=='nl' else ''}<a href="{t['sup']}">{t['suplab']}</a><a href="{t['pri']}">{t['prilab']}</a></nav></footer>
-'''
+    return home_v2.foot(t)
 
 def home(t, path, alt):
-    ld = '{"@context":"https://schema.org","@type":"MobileApplication","name":"Theorie B","operatingSystem":"iOS","applicationCategory":"EducationalApplication","inLanguage":["nl","en"],"url":"%s%s","downloadUrl":"%s","description":%s}' % (BASE, path, t["store"], '"%s"' % t['desc'].replace('"','\\"'))
-    s = head(t, t['title'], t['desc'], path, alt, f'<script type="application/ld+json">{ld}</script>\n')
-    s += '<body class="home">\n<a class="skip" href="#main">Skip to content</a>\n'
-    s += nav(t)
-    s += f'''<main id="main">
-<section class="hero"><div class="hero-t"><h1>{t['h1']}</h1><p class="lead">{t['sub']}</p>
-<ul class="chips">{''.join(f'<li>{c}</li>' for c in t['chips'])}</ul>
-<p><a class="badge" href="{t['store']}"><img src="/assets/{t['badge']}" width="150" height="50" alt="{t['badgealt']}"></a></p></div>
-<img class="hero-img" src="/assets/{t['hero']}" width="640" height="1354" alt="{t['alt_hero']}" fetchpriority="high"></section>
-'''
-    for i,(h,p,img,alt) in enumerate(t['secs']):
-        s += f'''<section class="row{' rev' if i%2 else ''}"><div class="row-t"><h2>{h}</h2><p>{p}</p></div><img src="/assets/{img}" width="640" height="1391" loading="lazy" alt="{alt}"></section>
-'''
-    if t['lang']=='nl' and BLOGS:
-        s += '<section class="uitleg"><h2>Verkeersregels uitgelegd</h2><ul class="bloglijst">' + ''.join(f'<li><a href="/blog/{b["slug"]}/">{html.escape(b["titel"])}</a></li>' for b in BLOGS) + '</ul><p><a href="/blog/">Alle uitleg</a></p></section>\n'
-    s += f'''<section class="cta"><h2>{t['cta_h']}</h2><p>{t['cta_p']}</p><p class="price">{t['price']}</p><p><a class="badge" href="{t['store']}"><img src="/assets/{t['badge']}" width="150" height="50" alt="{t['badgealt']}"></a></p><p class="small">{t['privacy_line']}</p></section>
-</main>
-'''
-    s += foot(t) + '</body>\n</html>\n'
-    return s
+    return home_v2.render(t, path, alt, head, BLOGS)
+
+DOC_TITLE = {"support/index.html": "Hulp en veelgestelde vragen | Theorie B", "en/support/index.html": "Help and FAQ | Theorie B", "privacy/index.html": "Privacybeleid | Theorie B", "en/privacy/index.html": "Privacy policy | Theorie B"}
+DOC_META = {"support/index.html": "Hulp nodig met Theorie B op je iPhone? Vind antwoorden op vragen over de app, lees hoe je je aankoop herstelt of neem contact op voor hulp.", "en/support/index.html": "Need help with Theorie B on your iPhone? Find answers to questions about the app, learn how to restore your purchase or contact us for support.", "privacy/index.html": "Lees hoe Theorie B met je privacy omgaat. Je hebt geen account nodig, je wordt niet gevolgd en je voortgang blijft op je eigen iPhone staan.", "en/privacy/index.html": "Read how Theorie B handles your privacy. You don't need an account, there's no tracking, and your practice progress stays on your own iPhone."}
 
 def page(src, out, lang, other_out):
     t = T[lang]
-    raw = open(os.path.join(SRC, src), encoding="utf-8").read()
+    raw = Path(SRC, src).read_text(encoding="utf-8")
     m = re.search(r'<title>(.*?)</title>', raw, re.S)
     title = m.group(1)
     body = re.search(r'<body><main>(.*)</main></body>', raw, re.S).group(1)
@@ -113,17 +95,19 @@ def page(src, out, lang, other_out):
     path = "/" + out.replace("index.html","")
     alt = "/" + other_out.replace("index.html","")
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    s = head(t, title, title, path, alt)
-    s += '<body class="doc">\n<a class="skip" href="#main">Skip to content</a>\n'
+    s = head(t, DOC_TITLE.get(out, title), DOC_META.get(out, title), path, alt)
+    s += '<body class="doc">\n<a class="skip" href="#main">' + ('Naar de inhoud' if lang == 'nl' else 'Skip to content') + '</a>\n'
     s += nav(t, alt)
     s += f'<main id="main" class="doc-main">{body}</main>\n' + foot(t) + '</body>\n</html>\n'
-    open(out, "w", encoding="utf-8").write(s)
+    Path(out).write_text(s, encoding="utf-8")
 
 import blog
 BLOGS = blog.lees()
+home_v2.assets()
 blog.bouw(head, nav, foot, T, BASE, STORE)
-open("index.html","w").write(home(T["nl"], "/", "/en/"))
-open("en/index.html","w").write(home(T["en"], "/en/", "/"))
+nl_home = home(T["nl"], "/", "/en/")
+Path('index.html').write_text(nl_home)
+Path('en/index.html').write_text(home(T["en"], "/en/", "/"))
 page("klaar-voor-1.0.1/support.html","support/index.html","nl","en/support/index.html")
 page("klaar-voor-1.0.1/support-en.html","en/support/index.html","en","support/index.html")
 page("privacy.html","privacy/index.html","nl","en/privacy/index.html")
@@ -135,11 +119,11 @@ x = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.
 for p in pages:
     a,b = pair[p]
     x += f' <url><loc>{BASE}{p}</loc><xhtml:link rel="alternate" hreflang="nl" href="{BASE}{a}"/><xhtml:link rel="alternate" hreflang="en" href="{BASE}{b}"/><xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{a}"/></url>\n'
-x += f' <url><loc>{BASE}/blog/</loc><lastmod>{blog.DATUM}</lastmod></url>\n' + ''.join(f' <url><loc>{BASE}/blog/{b["slug"]}/</loc><lastmod>{blog.DATUM}</lastmod></url>\n' for b in BLOGS)
-open("sitemap.xml","w").write(x+'</urlset>\n')
-open("robots.txt","w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
-open(".nojekyll","w").write("")
-if REAL: open("CNAME","w").write(BASE.split("://")[-1]+"\n")
+x += blog.sitemap(BLOGS, BASE)
+Path('sitemap.xml').write_text(x+'</urlset>\n')
+Path('robots.txt').write_text(f"User-agent: *\nAllow: /\nDisallow: /_v2/\nDisallow: /tests/\nSitemap: {BASE}/sitemap.xml\n")
+Path('.nojekyll').write_text("")
+
 
 n=T["nl"]; e=T["en"]
 doc = f"""{head(n,"Theorie B: pagina niet gevonden / page not found","Pagina niet gevonden. Page not found.","/404.html","/404.html")}<body class="doc">
@@ -147,8 +131,8 @@ doc = f"""{head(n,"Theorie B: pagina niet gevonden / page not found","Pagina nie
 {foot(n)}</body>
 </html>
 """
-open("404.html","w").write(doc)
-open("llms.txt","w").write(f"""# Theorie B
+Path('404.html').write_text(doc)
+Path('llms.txt').write_text(f"""# Theorie B
 
 > Theorie B is an iPhone app to practise for the Dutch car theory test (category B), in Dutch or English, with an explanation and a source for every answer. 225 original practice questions, mock test of 50 questions in 30 minutes, 44 correct needed. Independent of the CBR.
 
@@ -163,3 +147,6 @@ open("llms.txt","w").write(f"""# Theorie B
 - [Verkeersregels uitgelegd (Nederlands)]({BASE}/blog/): korte uitleg per verkeersregel met wetsartikel en oefenvraag.
 - [App Store]({STORE})
 """)
+
+with open("llms.txt", "a") as f:
+    f.write(blog.llms(BLOGS, BASE))

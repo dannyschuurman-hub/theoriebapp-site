@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "art_direction": "Fotorealistische Nederlandse straten, blauw uur of zacht daglicht, nat asfalt, rustig filmisch beeld, geel accent. Geen tekst, leesbare borden, herkenbare gezichten of verzonnen schermen.",
+  "scenes": {
+    "geel-verkeerslicht-stoppen": "Leeg Nederlands kruispunt met geel verkeerslicht rechts, donkere lucht.",
+    "telefoon-vasthouden-tijdens-rijden": "Auto-interieur met hand aan stuur en zwart scherm in telefoonhouder.",
+    "rechtsaf-fietser-rechtdoor": "Fietser naast wachtende auto bij rechtsafslag, van achteren.",
+    "rechts-inhalen-in-de-file": "Verkeer op drie stroken, allemaal van camera af, nat asfalt.",
+    "parkeerschijf-tijd-afronden": "Parkeerschijf op dashboard door voorruit, onleesbare tijd, blauwe lijn buiten.",
+    "groot-licht-fietser-tegemoet": "Nachtweg met tegemoetkomende auto links in beeld, fietser rechts van camera af.",
+    "uitrit-verlaten-voetganger": "Wachtende auto achter trottoir, hardloper met gele jas."
+  },
+  "sources": {
+    "geel-verkeerslicht-stoppen": "ab08850b-f9bf-4021-bcae-d247113eaa06",
+    "telefoon-vasthouden-tijdens-rijden": "8a489c7d-46ac-4978-a01b-c1a3afbf580f",
+    "rechtsaf-fietser-rechtdoor": "35a27bd7-1c20-437f-bcff-065b59f6b15b",
+    "rechts-inhalen-in-de-file": "f2becc53-bdc4-4b9e-aa8a-51f2d4b80ad6",
+    "parkeerschijf-tijd-afronden": "1857fe18-58c1-4d8f-a036-2d7732d611ab",
+    "groot-licht-fietser-tegemoet": "24edb603-c399-4a46-a06f-20560d6d0382",
+    "uitrit-verlaten-voetganger": "f50aba56-8547-45c1-8681-8c08ca008401"
+  },
+  "review": "Alle zeven beelden visueel bekeken. Eerste nachtbeeld afgekeurd wegens verkeerde rijzijde; vervangen door correcte rijrichting. Conversie en uitsnede naar webformaten met Pillow."
+}
