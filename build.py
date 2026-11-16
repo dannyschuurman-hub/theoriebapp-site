@@ -32,14 +32,18 @@ T = {
   foot="Independent of the CBR.", suplab="Support", prilab="Privacy", share="/assets/share-en.jpg", shalt="Theorie B: Can you get 44? Dutch car theory test, in English", hero="hero-en.webp"),
 }
 
-def head(t, title, desc, path, alt_path, extra=""):
-    o = "en" if t["lang"]=="nl" else "nl"
+def head(t, title, desc, path, alt_path, extra="", ogtype="website"):
     nlp, enp = (path, alt_path) if t["lang"]=="nl" else (alt_path, path)
+    alts = "" if alt_path is None else f'''<link rel="alternate" hreflang="nl" href="{BASE}{nlp}">
+<link rel="alternate" hreflang="en" href="{BASE}{enp}">
+<link rel="alternate" hreflang="x-default" href="{BASE}{nlp}">
+'''
     return f'''<!doctype html>
 <html lang="{t['lang']}">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{html.escape(title)}</title>
@@ -47,10 +51,7 @@ def head(t, title, desc, path, alt_path, extra=""):
 <meta name="apple-itunes-app" content="app-id=6834047508">
 <meta name="theme-color" content="#F4FA58">
 <link rel="canonical" href="{BASE}{path}">
-<link rel="alternate" hreflang="nl" href="{BASE}{nlp}">
-<link rel="alternate" hreflang="en" href="{BASE}{enp}">
-<link rel="alternate" hreflang="x-default" href="{BASE}{nlp}">
-<meta property="og:type" content="website">
+{alts}<meta property="og:type" content="{ogtype}">
 <meta property="og:site_name" content="Theorie B">
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(desc)}">
@@ -59,7 +60,7 @@ def head(t, title, desc, path, alt_path, extra=""):
 <meta property="og:image:alt" content="{html.escape(t['shalt'])}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:locale" content="{'nl_NL' if t['lang']=='nl' else 'en_GB'}">
-<meta property="og:locale:alternate" content="{'en_GB' if t['lang']=='nl' else 'nl_NL'}">
+{'' if alt_path is None else '<meta property="og:locale:alternate" content="' + ('en_GB' if t['lang']=='nl' else 'nl_NL') + '">'}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -74,7 +75,7 @@ def nav(t, other_href=None):
 '''
 
 def foot(t):
-    return f'''<footer class="foot"><p>{t['foot']}</p><nav aria-label="Footer"><a href="{t['sup']}">{t['suplab']}</a><a href="{t['pri']}">{t['prilab']}</a></nav></footer>
+    return f'''<footer class="foot"><p>{t['foot']}</p><nav aria-label="Footer">{'<a href="/blog/">Verkeersregels uitgelegd</a>' if t['lang']=='nl' else ''}<a href="{t['sup']}">{t['suplab']}</a><a href="{t['pri']}">{t['prilab']}</a></nav></footer>
 '''
 
 def home(t, path, alt):
@@ -91,6 +92,8 @@ def home(t, path, alt):
     for i,(h,p,img,alt) in enumerate(t['secs']):
         s += f'''<section class="row{' rev' if i%2 else ''}"><div class="row-t"><h2>{h}</h2><p>{p}</p></div><img src="/assets/{img}" width="640" height="1391" loading="lazy" alt="{alt}"></section>
 '''
+    if t['lang']=='nl' and BLOGS:
+        s += '<section class="uitleg"><h2>Verkeersregels uitgelegd</h2><ul class="bloglijst">' + ''.join(f'<li><a href="/blog/{b["slug"]}/">{html.escape(b["titel"])}</a></li>' for b in BLOGS) + '</ul><p><a href="/blog/">Alle uitleg</a></p></section>\n'
     s += f'''<section class="cta"><h2>{t['cta_h']}</h2><p>{t['cta_p']}</p><p class="price">{t['price']}</p><p><a class="badge" href="{t['store']}"><img src="/assets/{t['badge']}" width="150" height="50" alt="{t['badgealt']}"></a></p><p class="small">{t['privacy_line']}</p></section>
 </main>
 '''
@@ -116,6 +119,9 @@ def page(src, out, lang, other_out):
     s += f'<main id="main" class="doc-main">{body}</main>\n' + foot(t) + '</body>\n</html>\n'
     open(out, "w", encoding="utf-8").write(s)
 
+import blog
+BLOGS = blog.lees()
+blog.bouw(head, nav, foot, T, BASE, STORE)
 open("index.html","w").write(home(T["nl"], "/", "/en/"))
 open("en/index.html","w").write(home(T["en"], "/en/", "/"))
 page("klaar-voor-1.0.1/support.html","support/index.html","nl","en/support/index.html")
@@ -129,6 +135,7 @@ x = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.
 for p in pages:
     a,b = pair[p]
     x += f' <url><loc>{BASE}{p}</loc><xhtml:link rel="alternate" hreflang="nl" href="{BASE}{a}"/><xhtml:link rel="alternate" hreflang="en" href="{BASE}{b}"/><xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{a}"/></url>\n'
+x += f' <url><loc>{BASE}/blog/</loc><lastmod>{blog.DATUM}</lastmod></url>\n' + ''.join(f' <url><loc>{BASE}/blog/{b["slug"]}/</loc><lastmod>{blog.DATUM}</lastmod></url>\n' for b in BLOGS)
 open("sitemap.xml","w").write(x+'</urlset>\n')
 open("robots.txt","w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
 open(".nojekyll","w").write("")
@@ -153,5 +160,6 @@ open("llms.txt","w").write(f"""# Theorie B
 - [Support (English)]({BASE}/en/support/)
 - [Privacy (Nederlands)]({BASE}/privacy/)
 - [Privacy (English)]({BASE}/en/privacy/)
+- [Verkeersregels uitgelegd (Nederlands)]({BASE}/blog/): korte uitleg per verkeersregel met wetsartikel en oefenvraag.
 - [App Store]({STORE})
 """)

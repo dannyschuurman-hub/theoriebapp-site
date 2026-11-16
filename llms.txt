@@ -10,4 +10,5 @@
 - [Support (English)](https://theoriebapp.nl/en/support/)
 - [Privacy (Nederlands)](https://theoriebapp.nl/privacy/)
 - [Privacy (English)](https://theoriebapp.nl/en/privacy/)
+- [Verkeersregels uitgelegd (Nederlands)](https://theoriebapp.nl/blog/): korte uitleg per verkeersregel met wetsartikel en oefenvraag.
 - [App Store](https://apps.apple.com/nl/app/id6834047508)

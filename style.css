@@ -57,3 +57,12 @@ a{color:inherit}
 .doc .foot{max-width:680px;padding-left:20px;padding-right:20px}
 @media(prefers-reduced-motion:no-preference){.btn{transition:transform .15s}}
 .badge{display:inline-block;line-height:0}.badge img{height:50px;width:auto}
+/* blog (16-11) */
+.kruimel{font-size:14px;margin:0 0 12px}.kruimel a{color:inherit}
+.blog article h1{margin-bottom:20px}
+.blog ul{padding-left:22px;margin:0 0 14px}.blog li{margin:0 0 6px}
+.scherm{margin:24px auto 28px;text-align:center}.scherm img{width:min(300px,75vw);height:auto;border-radius:28px;border:6px solid var(--ink);display:block;margin:0 auto}
+.scherm figcaption{font-size:14px;margin-top:10px;opacity:.75}
+.bloglijst{list-style:none;padding:0;margin:20px 0}.bloglijst li{border-top:1px solid var(--line);padding:14px 0}.bloglijst li:last-child{border-bottom:1px solid var(--line)}
+.bloglijst a{font-weight:700;font-size:19px;color:inherit}.bloglijst span{display:block;font-size:15px;opacity:.75;margin-top:4px}
+.uitleg{max-width:680px;margin:0 auto;padding:56px 20px}.uitleg h2{font-size:clamp(34px,9vw,52px);margin:0 0 8px}
