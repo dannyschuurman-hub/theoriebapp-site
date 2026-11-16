@@ -111,3 +111,30 @@ html:not(.motion) .exam-phone .option.correct b,.language-phone .option.correct 
 html:not(.motion) .exam-phone .choose-answer,.language-phone .choose-answer{display:none}
 html:not(.motion) .exam-phone .next-question,.language-phone .next-question{display:block}
 html:not(.motion) .exam-phone .app-progress i,.language-phone .app-progress i{width:10%}
+/* 16-11 scroll: de hero draait op de compositor (CSS-scrolltijdlijn), los van de hoofdthread.
+   Zelfde krommen als site.js draw(); browsers zonder scroll-timeline houden de JS-versie. */
+@supports (animation-timeline:view()){
+html.motion .hero{view-timeline:--hero block;view-timeline-inset:0px}
+html.motion .hero-title{animation:th-title linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+html.motion .far{animation:th-far linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+html.motion .hero .near{animation:th-near linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+html.motion .green-foreground{will-change:auto}
+html.motion .green-foreground img{will-change:transform,opacity;animation:th-near linear both,th-green linear both;animation-timeline:--hero,--hero;animation-range:contain 0% contain 100%}
+html.motion .scene{animation:th-scene linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+html.motion .hero-caption,html.motion .hero-note{animation:th-caption linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+html.motion .hero-phone{transform:none;will-change:transform,opacity;animation:th-phone-o linear both,th-phone-t linear both,th-phone-r linear both,th-phone-s linear both;animation-timeline:--hero,--hero,--hero,--hero;animation-range:contain 0% contain 100%}
+html.motion .flash{animation:th-flash linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+}
+@keyframes th-title{from{transform:none}to{transform:translateY(42svh)}}
+@keyframes th-far{from{transform:none}to{transform:translateY(-6svh) scale(1.05)}}
+@keyframes th-near{from{transform:none}to{transform:translateY(9svh) scale(1.15)}}
+@keyframes th-green{0%,5%{opacity:1}22%,100%{opacity:0}}
+@keyframes th-scene{0%,53%{transform:none;animation-timing-function:cubic-bezier(.33,1,.68,1)}100%{transform:scale(2.4)}}
+@keyframes th-caption{0%,10%{opacity:1}35%,100%{opacity:0}}
+@keyframes th-phone-o{0%,35%{opacity:0}50%,100%{opacity:1}}
+@keyframes th-phone-t{0%,35%{translate:0 180px;animation-timing-function:cubic-bezier(.33,1,.68,1)}65%,100%{translate:0 0}}
+@keyframes th-phone-r{0%,50%{rotate:-12deg}80%,100%{rotate:0deg}}
+@keyframes th-phone-s{0%,68%{scale:1}100%{scale:19}}
+@keyframes th-flash{0%,85%{opacity:0}98%,100%{opacity:1}}
+/* De telefoon in de hero is beeld: geen eigen scrollvlak, anders kost zijn fade elk beeld een extra renderpas. */
+.hero-phone .home-content{overflow:hidden}
