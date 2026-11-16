@@ -25,3 +25,6 @@
 /* Keep clamped card intros inside their own box, clear of the metadata. */
 .card .intro{max-height:3.3em}
 .card.featured .intro{max-height:4.95em;flex-shrink:0}
+
+/* Smalle telefoons: merk krimpt nooit onder het menu door; waar de naam niet past alleen het B-icoon (naam blijft voor schermlezers). */
+.mag-nav .brand,.home-v2 .mag-nav .brand{flex-shrink:0;white-space:nowrap}@media(max-width:389px){.mag-nav .brand,.home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:429px){html[lang=en] .mag-nav .brand,html[lang=en] .home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:340px){.mag-nav nav,.home-v2 .mag-nav nav{gap:8px}.mag-nav .nav-app,.home-v2 .nav-app{padding-inline:8px}}

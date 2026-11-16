@@ -141,3 +141,6 @@ html.motion .flash{animation:th-flash linear both;animation-timeline:--hero;anim
 @media(min-width:701px){.hero-title{width:auto;right:3%}.hero-title h1{font-size:clamp(82px,min(11vw,17.5svh),160px)}}
 @media(min-width:701px) and (max-height:500px){.hero-title{right:0}.hero-title h1{font-size:min(12.3vw,19svh)}}
 @media(min-width:701px) and (min-aspect-ratio:16/9.6){.hero-title{right:0}}
+
+/* Smalle telefoons: merk krimpt nooit onder het menu door; waar de naam niet past alleen het B-icoon (naam blijft voor schermlezers). */
+.mag-nav .brand,.home-v2 .mag-nav .brand{flex-shrink:0;white-space:nowrap}@media(max-width:389px){.mag-nav .brand,.home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:429px){html[lang=en] .mag-nav .brand,html[lang=en] .home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:340px){.mag-nav nav,.home-v2 .mag-nav nav{gap:8px}.mag-nav .nav-app,.home-v2 .nav-app{padding-inline:8px}}
