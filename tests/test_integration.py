@@ -1,6 +1,29 @@
 import unittest, subprocess, pathlib, re, json
 from pathlib import Path
 class Build(unittest.TestCase):
+ def test_phone_practice_and_question_language_are_separate(self):
+  # Catch exam chrome leaking into practice, and page translation overwriting
+  # the independent question language (the app toolbar must stay in app language).
+  import runpy, sys, home_v2
+  previous=sys.argv
+  try:
+   sys.argv=['build.py','https://theoriebapp.nl']
+   ns=runpy.run_path('build.py')
+  finally: sys.argv=previous
+  for lang in ['nl','en']:
+   output=home_v2.render(ns['T'][lang],'/' if lang=='nl' else '/en/','/',ns['head'],[])
+   practice=output.split('class="iphone exam-phone"')[1].split('class="landing-flash"')[0]
+   self.assertNotIn('29:54',practice)
+   self.assertNotIn('van 50',practice)
+   self.assertNotIn('wrong-feedback',practice)
+   self.assertEqual(practice.count('class="practice-progress"'),3)
+   self.assertEqual(practice.count('Report an error' if lang=='en' else 'Fout melden'),3)
+   for pane in ['nl','en']:
+    article=re.search(r'<article class="question language-'+pane+r'".*?</article>',output).group()
+    self.assertIn('Question 1 of 10' if lang=='en' else 'Vraag 1 van 10',article)
+    self.assertIn('The light turns amber.' if pane=='en' else 'Het licht wordt geel.',article)
+    self.assertIn(('Question in Dutch' if pane=='en' else 'Question in English') if lang=='en' else ('Vraag in het Nederlands' if pane=='en' else 'Vraag in het Engels'),article)
+   self.assertEqual(output.count('<span>09:41</span>'),3)
  def test_build_contract(self):
   cname=pathlib.Path('CNAME'); before=(cname.read_bytes(),cname.stat().st_mtime_ns)
   subprocess.run(['python3','build.py','https://theoriebapp.nl'],check=True)

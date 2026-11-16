@@ -32,12 +32,17 @@ def render(t,path,alt,head,blogs):
    t=html.unescape(m[1]); kern=t.strip(); voor=t[:len(t)-len(t.lstrip())]; na=t[len(t.rstrip()):]
    return '>'+voor+html.escape(pairs.get(kern,kern),quote=False)+na+'<' if kern in pairs else m[0]
   s=re.sub(r'>([^<>]+)<',vertaal,s)
-  # Demo's Dutch pane remains Dutch on either home; only exam and topic examples translate.
+  s=s.replace('<div class="question-card" lang="nl"','<div class="question-card" lang="en"')
+  # Question language is independent of app language. Restore both language-demo
+  # cards, while retaining translated app navigation, progress and bottom bar.
   original=Path('_v2/home.html').read_text()
-  nl=re.search(r'<article class="question language-nl".*?</article>',original).group()
-  s=re.sub(r'<article class="question language-nl".*?</article>',lambda _:nl,s)
+  for lang in ['nl','en']:
+   pattern=r'(<article class="question language-'+lang+r'".*?)(<div class="question-card".*?)(?=</div><div class="app-bottom">)'
+   card=re.search(pattern,original)[2]
+   card=card.replace('Vraag in het Engels','Question in English').replace('Vraag in het Nederlands','Question in Dutch')
+   s=re.sub(pattern,lambda m:m[1]+card,s)
   s=s.replace('appstore-nl.svg','appstore-en.svg').replace('Download in de App Store','Download on the App Store').replace('https://apps.apple.com/nl/','https://apps.apple.com/')
-  s=re.sub(r'(<article class="question "[^>]*lang=")nl',r'\1en',s)
+  s=s.replace('lang="nl"><div class="app-nav"','lang="en"><div class="app-nav"')
   s=s.replace('Een Nederlands kruispunt in het blauwe uur, met nat asfalt en een geel verkeerslicht.','A Dutch junction at dusk, with wet asphalt and an amber traffic light.').replace('Het kruispunt in het blauwe uur.','The junction at dusk.').replace('Taal van de voorbeeldvraag','Language of the sample question')
  cards=''
  if blogs:
@@ -53,6 +58,18 @@ def render(t,path,alt,head,blogs):
  return h+'<body class="home-v2">'+s+'</body></html>'
 
 EN = {
+'OEFENEN. MET UITLEG.':'PRACTISE. WITH EXPLANATIONS.',
+'Vraag 1 van 10':'Question 1 of 10','Kies een antwoord':'Choose an answer',
+'Goed':'Correct','Niet goed':'Incorrect','Fout melden':'Report an error',
+'Vraag in het Engels':'Question in Dutch','Vraag in het Nederlands':'Question in English',
+'Haal jij 44?':'Can you get 44?',
+'Oefen voor je theorie-examen auto. Je hebt 44 van de 50 vragen goed nodig.':'Practise for your car theory test. You need 44 out of 50 correct.',
+'Start gratis proefexamen':'Start free mock exam',
+'50 vragen · 30 minuten · 44 goed nodig':'50 questions · 30 minutes · 44 correct needed',
+'Vul je examendatum in':'Add your exam date','Oefen per onderwerp':'Practise by topic',
+'Alle 225 oefenvragen':'All 225 practice questions','Eenmalig betalen.':'One-time purchase.',
+'Theorie B heeft eigen oefenvragen en geen band met het CBR. Je score zegt niets over je CBR-uitslag en geeft geen garantie dat je slaagt.':'Theorie B uses its own practice questions and has no link to the CBR. Your score says nothing about your CBR result and does not guarantee that you will pass.',
+'Over deze app':'About this app',
 'Naar de inhoud':'Skip to content','JE THEORIE-EXAMEN BEGINT HIER.':'YOUR THEORY TEST STARTS HERE.', 'Haal jij ':'Can you get ', 'Haal jij':'Can you get',
 'Het licht wordt geel.':'The light turns amber.','Jij weet wat je doet.':'You know what to do.','Theorie B voor iPhone':'Theorie B for iPhone','Oefenen. Begrijpen. Door.':'Practise. Understand. Move on.',
 '50 vragen. 30 minuten.':'50 questions. 30 minutes.','Even alleen jij.':'Just you and the road.','Start proefexamen ↗':'Start mock test ↗',
