@@ -19,7 +19,8 @@ def assets():
 
 def render(t,path,alt,head,blogs):
  s=Path('_v2/home.html').read_text()
- s=re.sub(r'(?<=["\'])assets/', '/assets/home/',s).replace('src="site.js"','src="/assets/home/site.js"')
+ # Ook de 2x-bron na de komma in srcset krijgt het /assets/home/-pad.
+ s=re.sub(r'(?:(?<=["\'])|(?<=, ))assets/', '/assets/home/',s).replace('src="site.js"','src="/assets/home/site.js"')
  if t['lang']=='en':
   # Translate exact question/option/explanation strings from the app's source.
   pairs={}
