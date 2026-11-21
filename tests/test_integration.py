@@ -64,7 +64,12 @@ class Build(unittest.TestCase):
    text=p.read_text()
    for lang in ['nl','en','x-default']: self.assertIn(f'hreflang="{lang}"',text)
    ld=[json.loads(x) for x in re.findall(r'<script type="application/ld\+json">(.*?)</script>',text)]
+   ld=[y for x in ld for y in x.get('@graph',[x])]
    app=next(x for x in ld if x['@type']=='MobileApplication')
+   self.assertTrue({'Organization','WebSite'}<={x['@type'] for x in ld})
+   org=next(x for x in ld if x['@type']=='Organization')
+   self.assertTrue(all(u.startswith('https://www.') for u in org['sameAs']))
+   self.assertNotIn('aggregateRating',json.dumps(ld))
    self.assertTrue(app['url'].startswith('https://theoriebapp.nl/'))
  def test_document_text_unchanged(self):
   from html.parser import HTMLParser

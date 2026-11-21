@@ -30,7 +30,7 @@ T = {
         ("225 questions, 9 topics","Practise by topic, at your own pace. See your progress by topic.","en-05-onderwerpen.webp","Theorie B topic overview with progress")],
   cta_h="Try it free", cta_p="Free: one round of 10 practice questions and your first mock test, including explanations, mistake review and your scorecard. A one-off purchase gives you all 225 questions and unlimited practice and mock tests. There is no subscription or advertising. You do not need an account or login.",
   price="Price in the App Store", privacy_line="Your progress stays on your iPhone. The app collects no data.",
-  foot="Independent of the CBR.", suplab="Support", prilab="Privacy", share="/assets/share-en.jpg", shalt="Theorie B: Can you get 44? Dutch car theory test, in English", hero="hero-en.webp"),
+  foot="Independent of the CBR. Currently available in the Dutch App Store.", suplab="Support", prilab="Privacy", share="/assets/share-en.jpg", shalt="Theorie B: Can you get 44? Dutch car theory test, in English", hero="hero-en.webp"),
 }
 
 def head(t, title, desc, path, alt_path, extra="", ogtype="website"):
@@ -152,3 +152,18 @@ Path('llms.txt').write_text(f"""# Theorie B
 
 with open("llms.txt", "a") as f:
     f.write(blog.llms(BLOGS, BASE))
+
+# Campagnelinks (21-11): alleen actief als APPLE_PT (provider-token uit App Store Connect) is gezet. Zonder token geen wijziging.
+PT = os.environ.get("APPLE_PT", "")
+if PT:
+    import glob
+    def ct_voor(p):
+        if p.startswith("en/blog/") or p.startswith("en/"): return "site-en-blog" if "/blog/" in "/"+p else "site-en"
+        if p.startswith("blog/"): return "site-nl-blog"
+        if p.startswith(("support","privacy","en/support","en/privacy")): return "site-doc"
+        return "site-nl-home"
+    for p in glob.glob("**/*.html", recursive=True):
+        if p.startswith(("_v2","tests")): continue
+        s = Path(p).read_text(encoding="utf-8"); ct = ct_voor(p)
+        n = re.sub(r'(https://apps\.apple\.com/(?:nl/)?app/id6834047508)(?![?\w])', lambda m: f"{m[1]}?pt={PT}&ct={ct}&mt=8", s)
+        if n != s: Path(p).write_text(n, encoding="utf-8")
