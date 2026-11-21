@@ -67,7 +67,7 @@ def lees(taal='nl', alles=False):
                  paar=(a.get(andere) or {}).get('slug') or None)
         b['minuten'] = max(1, math.ceil(len(b['body'].split()) / 220))
         if len(b['meta']) < 140: b['meta'] = b['meta'].rstrip('.') + L[taal]['meta_extra']
-        if len(b['meta']) > 160: b['meta'] = b['meta'][:157].rsplit(' ', 1)[0] + '.'
+        b['meta'] = kort_meta(b['meta'])
         uit.append(b)
     return sorted(uit, key=lambda b: b['datum'], reverse=True)
 
@@ -102,6 +102,17 @@ def md(body, taal='nl'):
         elif blok.startswith(L[taal]['wet']): continue
         else: out.append('<p>' + inline(' '.join(blok.splitlines())) + '</p>')
     return '\n'.join(out)
+
+
+def kort_meta(m, grens=155):
+    # SEO 22-11: meta-description max 155 tekens, afkappen op een woordgrens
+    if len(m) <= grens: return m
+    return m[:grens - 2].rsplit(' ', 1)[0].rstrip(',;:') .rstrip('.') + '.'
+
+
+def kort_titel(t, merk=' | Theorie B', grens=60):
+    # SEO 22-11: titel max 60 tekens; past het merk er niet bij, dan blijft de pure titel staan
+    return t + merk if len(t) + len(merk) <= grens else t
 
 
 def card(b, featured=False):
@@ -166,9 +177,9 @@ def bouw(head, nav, foot, T, BASE, STORE):
         for i in onderwerpen(blogs):
             subset = [b for b in blogs if b['topic'] == i]; name = hubnaam(i, taal)
             hub_alt = hub(i, andere) if any(b['topic'] == i for b in alle[andere]) else None
-            meta = HUBS[i][taal]['meta'] or HUBS[i][taal]['intro'] or HUBS[i]['nl']['meta']
+            meta = kort_meta(HUBS[i][taal]['meta'] or HUBS[i][taal]['intro'] or HUBS[i]['nl']['meta'])
             content = f'<section class="wrap hub-heading"><a class="back" href="{BASIS[taal]}">{t["alle"]}</a><p class="kicker">{t["onderwerp"]} / {i:02d}</p><h1>{esc(name)}</h1><p class="hub-intro">{esc(HUBS[i][taal]["intro"])}</p><span class="edition">{len(subset)} {t["artikelen"]}</span></section><section class="wrap articles"><div class="card-grid">' + ''.join(card(b) for b in subset) + '</div></section>' + cta(store, taal, i)
-            write(hub(i, taal), shell(taal, name + ' | Theorie B', meta, hub(i, taal), hub_alt, [{'@type': 'CollectionPage', 'name': name, 'inLanguage': taal, 'url': BASE + hub(i, taal), 'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': j + 1, 'url': BASE + url(b), 'name': b['titel']} for j, b in enumerate(subset)]}}], content, head, T))
+            write(hub(i, taal), shell(taal, kort_titel(name), meta, hub(i, taal), hub_alt, [{'@type': 'CollectionPage', 'name': name, 'inLanguage': taal, 'url': BASE + hub(i, taal), 'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': j + 1, 'url': BASE + url(b), 'name': b['titel']} for j, b in enumerate(subset)]}}], content, head, T))
         for b in blogs:
             q = questions[b['qid']]; related = sorted([a for a in blogs if a is not b], key=lambda a: a['topic'] != b['topic'])[:3]
             alt = paar_url(b) if b['paar'] and any(a['slug'] == b['paar'] for a in alle[andere]) else None
@@ -177,7 +188,7 @@ def bouw(head, nav, foot, T, BASE, STORE):
             kruimels = [('Home', T[taal]['home']), ('Magazine', BASIS[taal]), (hubnaam(b['topic'], taal), hub(b['topic'], taal)), (b['titel'], url(b))]
             ld = [{'@type': 'BlogPosting', 'headline': b['titel'], 'description': b['meta'], 'image': BASE + '/assets/blog/og/' + b['cover'] + '.jpg', 'datePublished': b['datum'], 'dateModified': b['datum'], 'author': org, 'publisher': org, 'inLanguage': taal, 'mainEntityOfPage': BASE + url(b)},
                   {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': j + 1, 'name': n, 'item': BASE + p} for j, (n, p) in enumerate(kruimels)]}]
-            write(url(b), shell(taal, b['titel'] + ' | Theorie B', b['meta'], url(b), alt, ld, content, head, T, '/assets/blog/og/' + b['cover'] + '.jpg', b['datum']))
+            write(url(b), shell(taal, kort_titel(b['titel']), b['meta'], url(b), alt, ld, content, head, T, '/assets/blog/og/' + b['cover'] + '.jpg', b['datum']))
         rss = ET.Element('rss', version='2.0'); channel = ET.SubElement(rss, 'channel')
         for k, v in [('title', 'Theorie B magazine'), ('link', BASE + BASIS[taal]), ('description', t['rss_desc']), ('language', t['rss_lang'])]: ET.SubElement(channel, k).text = v
         for b in blogs:
