@@ -144,3 +144,13 @@ html.motion .flash{animation:th-flash linear both;animation-timeline:--hero;anim
 
 /* Smalle telefoons: merk krimpt nooit onder het menu door; waar de naam niet past alleen het B-icoon (naam blijft voor schermlezers). */
 .mag-nav .brand,.home-v2 .mag-nav .brand{flex-shrink:0;white-space:nowrap}@media(max-width:389px){.mag-nav .brand,.home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:429px){html[lang=en] .mag-nav .brand,html[lang=en] .home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:340px){.mag-nav nav,.home-v2 .mag-nav nav{gap:8px}.mag-nav .nav-app,.home-v2 .nav-app{padding-inline:8px}}
+
+/* 24-11 designronde: negatieve letterafstand at de spaties tussen woorden op ("Haaljij", "bijje"); woordafstand herstelt dat. */
+.home-v2 h1,.home-v2 h2,.topic-card h3,.footer-word{word-spacing:.1em}
+.iphone h3,.iphone h4{word-spacing:0}
+/* Kleine tekst naar leesbaar minimum (10-11px) op mobiel en in kaarten. */
+.topic-sample small{font-size:10px}.score-key{font-size:11px}
+@media(max-width:700px){.hero-title p{font-size:10px}.exam-copy>.eyebrow,.language .eyebrow{font-size:10px}.demo-label{font-size:10px}.captions p{font-size:14px}}
+.home-v2 .hero-title h1{word-spacing:.05em}
+/* EN-titel is ~1,5x breder dan NL en werd door lantaarn en stoplicht afgesneden op brede schermen. */
+@media(min-width:701px){html[lang=en] .hero-title h1{font-size:clamp(64px,min(7.4vw,12svh),120px)}}

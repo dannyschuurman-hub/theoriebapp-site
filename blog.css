@@ -28,3 +28,8 @@
 
 /* Smalle telefoons: merk krimpt nooit onder het menu door; waar de naam niet past alleen het B-icoon (naam blijft voor schermlezers). */
 .mag-nav .brand,.home-v2 .mag-nav .brand{flex-shrink:0;white-space:nowrap}@media(max-width:389px){.mag-nav .brand,.home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:429px){html[lang=en] .mag-nav .brand,html[lang=en] .home-v2 .mag-nav .brand{font-size:0;gap:0}}@media(max-width:340px){.mag-nav nav,.home-v2 .mag-nav nav{gap:8px}.mag-nav .nav-app,.home-v2 .nav-app{padding-inline:8px}}
+
+/* 24-11 designronde: woordafstand in strakke koppen (hub + kaarten), en het merkwoord in de footer breekt niet meer af. */
+.mag-heading h1,.section-heading h2,.card h2,.card h3{word-spacing:.1em}
+.footer-word{white-space:nowrap;word-spacing:.1em}
+@media(max-width:700px){.footer-word{font-size:clamp(48px,15vw,70px)}}
