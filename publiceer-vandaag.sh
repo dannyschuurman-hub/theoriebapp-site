@@ -3,7 +3,7 @@
 # Commit alleen blog-uitvoer en sitebestanden die de build raakt, nooit CNAME of het Google-bestand.
 set -e
 cd "$(dirname "$0")"
-git pull -q --rebase origin main
+git pull -q --rebase --autostash origin main
 python3 build.py https://theoriebapp.nl > /dev/null
 python3 -m unittest -q tests/test_integration.py 2>&1 | tail -1
 git diff --quiet CNAME google8d2a8cb9065b448d.html || { echo "CNAME of Google-bestand gewijzigd, stop"; exit 1; }
