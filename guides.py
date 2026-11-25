@@ -15,13 +15,13 @@ ARTIKELEN = {'nl': ['stilstaan-na-zebrapad', 'rechts-inhalen-in-de-file', 'fiets
 G = {
  'nl': dict(
   titel='Theorie-examen auto: zo werkt het en zo oefen je',
-  meta='Wat je moet weten over het theorie-examen auto: aantal vragen, wanneer je slaagt, in het Engels boeken en hoe je oefent met uitleg bij elk antwoord.',
+  meta='Wat je moet weten over het theorie-examen auto: aantal vragen, hoeveel je goed moet hebben, de tijd en hoe je oefent met uitleg bij elk antwoord.',
   kicker='Gids', h1='Theorie-examen auto: zo werkt het',
   intro='Het theorie-examen auto is het eerste deel van je rijbewijs B. Hier staat kort wat je kunt verwachten en hoe je je voorbereidt. Controleer de actuele regels altijd bij het CBR; Theorie B is onafhankelijk van het CBR.',
   secties=[
    ('wat', 'Wat is het theorie-examen?', [
-     'Het theorie-examen auto is een computerexamen van het CBR over verkeersregels en verkeerssituaties. Je krijgt 50 vragen die meetellen en je hebt ongeveer 30 minuten. Je slaagt met 44 of meer goede antwoorden.',
-     'Je boekt het examen zelf op de website van het CBR met DigiD. Het CBR past het examen soms aan, dus kijk voor je boekt nog even op de actuele examenpagina.']),
+     'Het theorie-examen auto is een computerexamen van het CBR over verkeersregels en verkeerssituaties. Je krijgt 50 examenvragen en 2 testvragen die niet meetellen. Je hebt 30 minuten, of 45 minuten met extra tijd. Je slaagt met minimaal 44 goede antwoorden van de 50.',
+     'Je vraagt het examen aan via Mijn CBR, met DigiD. Het CBR past het examen soms aan, dus kijk voor je boekt nog even op de actuele examenpagina.']),
    ('onderwerpen', 'Waar gaan de vragen over?', [
      'Over verkeersregels en situaties onderweg. Theorie B verdeelt dat in negen onderwerpen met samen 225 eigen oefenvragen: gebruik van de weg, voorrang en voor laten gaan, bijzondere wegen en manoeuvres, veilig rijden en noodsituaties, verkeerstekens, verantwoord rijden, wetgeving, voertuigkennis en rijhulpsystemen.']),
    ('oefenen', 'Zo oefen je slim', [
@@ -29,27 +29,27 @@ G = {
      '2. Doe daarna een proefexamen van 50 vragen en bekijk je fouten terug.',
      '3. Lees regels die je blijft missen na in het magazine. Een paar voorbeelden staan onderaan deze pagina.']),
    ('engels', 'Oefenen in het Nederlands of Engels', [
-     'Je kunt in de app wisselen tussen Nederlands en Engels, of alleen de vraag omzetten. Het CBR biedt het autoexamen ook in het Engels aan. Meer daarover staat in onze <a href="/en/dutch-car-theory-exam-in-english/" hreflang="en" lang="en">gids in het Engels</a>.']),
+     'Je kunt in de app wisselen tussen Nederlands en Engels, of alleen de vraag omzetten. Welke taal je voor het examen zelf kunt kiezen, controleer je bij het CBR voor je aanvraagt. Onze <a href="/en/dutch-car-theory-exam-in-english/" hreflang="en" lang="en">gids in het Engels</a> legt uit hoe je in het Engels oefent.']),
    ('proberen', 'Theorie B proberen', [
      '10 oefenvragen en je eerste proefexamen zijn gratis. Je hebt geen account nodig, er is geen reclame en je voortgang blijft op je iPhone.'])],
   faq_kop='Veelgestelde vragen',
-  faq=[('Hoeveel vragen heeft het theorie-examen auto?', 'Het examen heeft 50 vragen die meetellen. Controleer de actuele opzet voor je boekt op de website van het CBR.'),
+  faq=[('Hoeveel vragen heeft het theorie-examen auto?', 'Het examen heeft 50 examenvragen, plus 2 testvragen die niet meetellen. Controleer de actuele opzet bij het CBR.'),
        ('Hoeveel vragen moet ik goed hebben?', 'Je slaagt met minstens 44 goede antwoorden van de 50.'),
-       ('Mag ik het theorie-examen in het Engels doen?', 'Ja, het CBR biedt het autoexamen ook in het Engels aan. Je kiest de taal bij het boeken.'),
+       ('In welke taal kan ik het theorie-examen doen?', 'Dat controleer je bij het CBR voor je het examen aanvraagt. In de app kun je wel in het Nederlands en in het Engels oefenen.'),
        ('Is Theorie B van het CBR?', 'Nee. Theorie B is onafhankelijk en heeft eigen oefenvragen. Je score in de app zegt niets over je CBR-uitslag.')],
   verder='Lees ook', aside='Op deze pagina', home='Home', magazine='Magazine',
   back='← Magazine'),
  'en': dict(
   titel='Dutch car theory exam in English: how it works',
-  meta='Can you take the Dutch car theory exam in English? What to know about the exam, how to practise in English, and how Theorie B helps you prepare.',
+  meta='What to know about the Dutch car theory exam if Dutch is not your first language: how it works, how to practise in English, and how Theorie B helps.',
   kicker='Guide', h1='The Dutch car theory exam in English',
   intro='If you are learning to drive in the Netherlands and Dutch is not your first language, you can prepare in English. This page explains what to expect and how to practise. Always check the current rules with the CBR; Theorie B is independent of the CBR.',
   secties=[
-   ('english', 'Can I take the exam in English?', [
-     'Yes. The CBR offers the car (category B) theory exam in English as well as in Dutch. You choose the language when you book. You book the exam yourself on the CBR website with DigiD.',
-     'The CBR changes the exam from time to time, so check the current exam page before you book.']),
+   ('english', 'Which language is the exam in?', [
+     'Which languages you can choose for the exam itself is something to check with the CBR before you apply. This guide makes no promises about it. What you can do now is learn the rules in English, so you understand them whichever language the exam is in.',
+     'You apply for the exam through Mijn CBR, with DigiD. The CBR changes the exam from time to time, so check the current exam page before you apply.']),
    ('format', 'What the exam looks like', [
-     'The car theory exam is a computer exam about traffic rules and traffic situations. It has 50 questions that count and takes about 30 minutes. You pass with 44 or more correct answers.']),
+     'The car theory exam is a computer exam about traffic rules and traffic situations. It has 50 exam questions and 2 test questions that do not count. You have 30 minutes, or 45 minutes with extra time. You pass with at least 44 correct answers out of 50.']),
    ('covers', 'What the exam covers', [
      'Traffic rules and situations by topic. Theorie B covers nine topics with 225 original practice questions: using the road, priority and giving way, special roads and manoeuvres, safe driving and emergencies, traffic signs, responsible driving, legislation, vehicle knowledge and driver assistance systems.']),
    ('practise', 'How to practise in English', [
@@ -58,8 +58,8 @@ G = {
    ('try', 'Try Theorie B', [
      '10 practice questions and your first mock exam are free. There is no account, there are no ads, and your progress stays on your iPhone.'])],
   faq_kop='Frequently asked questions',
-  faq=[('Is the Dutch car theory exam available in English?', 'Yes. The CBR offers the car theory exam in English. You choose the language when you book.'),
-       ('Do I need to know Dutch road signs?', 'Yes, the signs are the Dutch ones. In the app, the explanations are in English.'),
+  faq=[('Is the exam itself available in English?', 'Check this with the CBR before you apply. Theorie B lets you practise in English or Dutch.'),
+       ('Do I need to know Dutch road signs?', 'Yes, the signs are the Dutch ones. In the app, the explanations can be in English.'),
        ('How many questions do I need to get right?', 'You pass with at least 44 correct answers out of 50.'),
        ('Is Theorie B affiliated with the CBR?', 'No. Theorie B is independent and has its own practice questions. Your score in the app says nothing about your CBR result.')],
   verder='Read next', aside='On this page', home='Home', magazine='Magazine',
