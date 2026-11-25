@@ -10,7 +10,7 @@ FONT = '<link rel="preload" href="/assets/fonts/inter-tight-latin-900-normal.wof
 
 T = {
  "nl": dict(lang="nl", home="/", other="/en/", otherlab="English", sup="/support/", pri="/privacy/", badge="appstore-nl.svg", store=STORE, badgealt="Download in de App Store",
-  title="Theorie B: auto examen oefenen", desc="Oefen voor je theorie-examen auto met Theorie B op je iPhone. Krijg 225 eigen oefenvragen met uitleg. Probeer gratis 10 vragen en je eerste proefexamen.",
+  title="Theorie B: auto theorie-examen oefenen met proefexamen", desc="Oefen voor je theorie-examen auto met Theorie B op je iPhone. Krijg 225 eigen oefenvragen met uitleg. Probeer gratis 10 vragen en je eerste proefexamen.",
   h1="Haal jij 44?", sub="Oefen voor je theorie-examen auto en begrijp waarom een antwoord klopt, met uitleg en bron bij elke vraag.",
   btn="Download in de App Store", chips=["Geen abonnement","Geen reclame","Ook in het Engels"], alt_hero="Theorie B uitslagscherm: 49 van 50 goed, grens van 44 gehaald",
   secs=[("Oefen met uitleg","225 zelfgeschreven oefenvragen op basis van de Nederlandse verkeerswetten, in 9 onderwerpen met elk 25 vragen. Bij elk antwoord staat uitleg met een wetsverwijzing, zoals RVV 1990, art. 15 lid 1.","nl-02-uitleg.webp","Theorie B toont een goed antwoord met uitleg en bron"),
@@ -21,7 +21,7 @@ T = {
   price="Prijs in de App Store", privacy_line="Je voortgang blijft op je iPhone. De app verzamelt geen gegevens.",
   foot="Onafhankelijk van het CBR.", suplab="Support", prilab="Privacy", share="/assets/share.jpg", shalt="Theorie B: Haal jij 44? Oefen voor je theorie-examen auto", hero="hero-nl.webp"),
  "en": dict(lang="en", home="/en/", other="/", otherlab="Nederlands", sup="/en/support/", pri="/en/privacy/", badge="appstore-en.svg", store="https://apps.apple.com/app/id6834047508", badgealt="Download on the App Store",
-  title="Theorie B: Dutch theory test", desc="Study for your car theory test with Theorie B on iPhone. Get 225 practice questions with explanations. Try 10 questions and your first mock test free.",
+  title="Theorie B: Dutch car theory test practice in English", desc="Study for your car theory test with Theorie B on iPhone. Get 225 practice questions with explanations. Try 10 questions and your first mock test free.",
   h1="Can you get 44?", sub="Practise for your Dutch car theory test and understand each answer, with an explanation and a source for every question.",
   btn="Download on the App Store", chips=["No subscription","No ads","Dutch or English"], alt_hero="Theorie B result screen: 49 out of 50 correct, the 44 pass mark reached",
   secs=[("Know why","225 questions written by the maker, based on Dutch traffic law, in 9 topics with 25 questions each. Every answer includes an explanation and a source, such as RVV 1990, art. 15 lid 1.","en-02-uitleg.webp","Theorie B shows a correct answer with an explanation and source"),
@@ -30,7 +30,7 @@ T = {
         ("225 questions, 9 topics","Practise by topic, at your own pace. See your progress by topic.","en-05-onderwerpen.webp","Theorie B topic overview with progress")],
   cta_h="Try it free", cta_p="Free: one round of 10 practice questions and your first mock test, including explanations, mistake review and your scorecard. A one-off purchase gives you all 225 questions and unlimited practice and mock tests. There is no subscription or advertising. You do not need an account or login.",
   price="Price in the App Store", privacy_line="Your progress stays on your iPhone. The app collects no data.",
-  foot="Independent of the CBR. Currently available in the Dutch App Store.", suplab="Support", prilab="Privacy", share="/assets/share-en.jpg", shalt="Theorie B: Can you get 44? Dutch car theory test, in English", hero="hero-en.webp"),
+  foot="Independent of the CBR. Available in the Dutch and UK App Stores.", suplab="Support", prilab="Privacy", share="/assets/share-en.jpg", shalt="Theorie B: Can you get 44? Dutch car theory test, in English", hero="hero-en.webp"),
 }
 
 def head(t, title, desc, path, alt_path, extra="", ogtype="website"):
