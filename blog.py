@@ -24,8 +24,8 @@ L = {
   fout='Nog niet goed. Dit is de regel:', cta_kicker='Van begrijpen naar oefenen', cta_h_topic='Oefen dit onderwerp in de app',
   cta_h='Neem de volgende afslag met vertrouwen.', cta_p='225 oefenvragen met uitleg en bron.',
   cta_small='Gratis proberen · Geen abonnement · Geen account', badge='/assets/appstore-nl.svg', badge_alt='Download in de App Store',
-  mag_title='Verkeersregels uitgelegd | Theorie B magazine',
-  mag_desc='Begrijp de regels op de Nederlandse weg. Lees heldere uitleg per onderwerp, ontdek herkenbare verkeerssituaties en test jezelf met een oefenvraag.',
+  mag_title='Verkeersregels uitgelegd voor je theorie-examen | Theorie B',
+  mag_desc='Begrijp de verkeersregels achter het theorie-examen auto. Korte uitleg per onderwerp met de regel erbij, zodat je weet waarom het antwoord klopt.',
   rss_desc='Verkeersregels helder uitgelegd', rss_lang='nl-nl', meta_extra='. Met een oefenvraag en uitleg bij het antwoord.',
   skip='Naar de inhoud', test_kop='## Test jezelf', wet='De wettelijke basis'),
  'en': dict(maanden=['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -37,11 +37,12 @@ L = {
   fout='Not quite. This is the rule:', cta_kicker='From understanding to practising', cta_h_topic='Practise this topic in the app',
   cta_h='Take the next turn with confidence.', cta_p='225 practice questions with explanations and sources.',
   cta_small='Try it free · No subscription · No account', badge='/assets/appstore-en.svg', badge_alt='Download on the App Store',
-  mag_title='Dutch traffic rules explained | Theorie B magazine',
-  mag_desc='Understand the rules of the road in the Netherlands. Clear explanations by topic for your Dutch car theory test, each with a practice question.',
+  mag_title='Dutch traffic rules explained for your theory exam',
+  mag_desc='Understand the Dutch traffic rules behind the car theory exam. Short explanations by topic, with the rule behind each answer.',
   rss_desc='Dutch traffic rules, clearly explained', rss_lang='en-gb', meta_extra='. With a practice question and an explained answer.',
   skip='Skip to content', test_kop='## Test yourself', wet='The legal basis'),
 }
+GIDS = {'nl': ('/theorie-examen-auto/', 'Nieuw bij het theorie-examen? Lees de gids: zo werkt het'), 'en': ('/en/dutch-car-theory-exam-in-english/', 'New to the Dutch theory exam? Read the guide')}
 _HUBS = json.loads((BRON / 'blog-hubs.json').read_text())['hubs']
 HUBS = {h['onderwerp']: h for h in _HUBS}
 TOPICS = {i: (h['nl']['slug'], h['nl']['naam'], h['nl']['intro']) for i, h in HUBS.items()}  # oude vorm, voor NL-code elders
@@ -170,6 +171,7 @@ def bouw(head, nav, foot, T, BASE, STORE):
         chips = f'<nav class="topic-chips" aria-label="{t["chips"]}">' + ''.join(f'<a href="{hub(i, taal)}">{esc(hubnaam(i, taal))}<span>{tel(i)}</span></a>' for i in onderwerpen(blogs)) + '</nav>'
         featured = next((b for b in blogs if b['qid'] == 'q142'), blogs[0])
         content = f'<section class="mag-heading wrap"><p class="kicker">{t["kicker_mag"]}</p><h1>{t["h1_mag"]}</h1><div class="heading-bottom"><p>{t["lead_mag"]}</p><span class="edition">{t["editie"]}</span></div>' + chips + '</section>'
+        content += f'<p class="wrap guide-link"><a href="{GIDS[taal][0]}">{GIDS[taal][1]} ↗</a></p>'
         content += f'<section class="wrap feature-section" aria-label="{t["uitgelicht"]}">' + card(featured, True) + '</section>'
         content += f'<section class="wrap articles"><div class="section-heading"><h2>{t["verder"]}</h2><span>{len(blogs)} {t["artikelen"]}</span></div><div class="card-grid">' + ''.join(card(b) for b in blogs if b is not featured) + '</div></section>' + cta(store, taal)
         mag_alt = BASIS[andere] if alle[andere] else None

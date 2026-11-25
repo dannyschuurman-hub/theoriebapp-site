@@ -80,7 +80,7 @@ def foot(t):
 def home(t, path, alt):
     return home_v2.render(t, path, alt, head, blog.lees(t["lang"]) or BLOGS)
 
-DOC_TITLE = {"support/index.html": "Hulp en veelgestelde vragen | Theorie B", "en/support/index.html": "Help and FAQ | Theorie B", "privacy/index.html": "Privacybeleid | Theorie B", "en/privacy/index.html": "Privacy policy | Theorie B"}
+DOC_TITLE = {"support/index.html": "Hulp en veelgestelde vragen over de Theorie B app", "en/support/index.html": "Help and FAQ for the Theorie B app", "privacy/index.html": "Privacybeleid | Theorie B", "en/privacy/index.html": "Privacy policy | Theorie B"}
 DOC_META = {"support/index.html": "Hulp nodig met Theorie B op je iPhone? Vind antwoorden op vragen over de app, lees hoe je je aankoop herstelt of neem contact op voor hulp.", "en/support/index.html": "Need help with Theorie B on your iPhone? Find answers to questions about the app, learn how to restore your purchase or contact us for support.", "privacy/index.html": "Lees hoe Theorie B met je privacy omgaat. Je hebt geen account nodig, je wordt niet gevolgd en je voortgang blijft op je eigen iPhone staan.", "en/privacy/index.html": "Read how Theorie B handles your privacy. You don't need an account, there's no tracking, and your practice progress stays on your own iPhone."}
 
 def page(src, out, lang, other_out):
@@ -104,10 +104,11 @@ def page(src, out, lang, other_out):
     s += f'<main id="main" class="doc-main">{body}</main>\n' + foot(t) + '</body>\n</html>\n'
     Path(out).write_text(s, encoding="utf-8")
 
-import blog
+import blog, guides
 BLOGS = blog.lees()
 home_v2.assets()
 blog.bouw(head, nav, foot, T, BASE, STORE)
+guides.bouw(head, T, BASE, {tl: blog.lees(tl) for tl in blog.TALEN})
 nl_home = home(T["nl"], "/", "/en/")
 Path('index.html').write_text(nl_home)
 Path('en/index.html').write_text(home(T["en"], "/en/", "/"))
@@ -122,6 +123,7 @@ x = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.
 for p in pages:
     a,b = pair[p]
     x += f' <url><loc>{BASE}{p}</loc><xhtml:link rel="alternate" hreflang="nl" href="{BASE}{a}"/><xhtml:link rel="alternate" hreflang="en" href="{BASE}{b}"/><xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{a}"/></url>\n'
+x += guides.sitemap(BASE, blog.DATUM)
 x += blog.sitemap(BLOGS, BASE)
 Path('sitemap.xml').write_text(x+'</urlset>\n')
 Path('robots.txt').write_text(f"User-agent: *\nAllow: /\nDisallow: /_v2/\nDisallow: /tests/\nSitemap: {BASE}/sitemap.xml\n")
@@ -149,7 +151,7 @@ Path('llms.txt').write_text(f"""# Theorie B
 - [Privacy (English)]({BASE}/en/privacy/)
 - [Verkeersregels uitgelegd (Nederlands)]({BASE}/blog/): korte uitleg per verkeersregel met wetsartikel en oefenvraag.
 - [Dutch traffic rules explained (English)]({BASE}/en/blog/): short explanations of Dutch traffic rules for the car theory test, with the law article and a practice question.
-- [App Store]({STORE})
+{guides.llms(BASE)}- [App Store]({STORE})
 """)
 
 with open("llms.txt", "a") as f:
