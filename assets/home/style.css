@@ -154,3 +154,14 @@ html.motion .flash{animation:th-flash linear both;animation-timeline:--hero;anim
 .home-v2 .hero-title h1{word-spacing:.05em}
 /* EN-titel is ~1,5x breder dan NL en werd door lantaarn en stoplicht afgesneden op brede schermen. */
 @media(min-width:701px){html[lang=en] .hero-title h1{font-size:clamp(64px,min(7.4vw,12svh),120px)}}
+
+/* 25-11 unslop-ronde: kaart-in-kaart weg, herhaalde opvulregels weg, geen losse decoratie. */
+.topic-card:not(.topic-type){background:none;border-radius:0;padding:18px 0 0;border-top:2px solid var(--ink)}
+.topic-card:not(.topic-type) .topic-number{border-bottom:0;padding-bottom:0;margin-bottom:10px;font-weight:750}
+.topic-card:not(.topic-type) .topic-sample{border:0;background:none;padding:0;margin-top:14px}
+.topic-card:not(.topic-type) .topic-sample small,.topic-card:not(.topic-type)>p{display:none}
+.topic-card:not(.topic-type) .topic-sample p{font-size:15px;line-height:1.4;font-weight:500;margin:0 0 16px}
+.topic-card:not(.topic-type) .topic-sample>span{display:inline-block;font-size:13px;font-weight:700;padding:7px 12px}
+.topic-type{border-radius:0}
+.score-card{transform:none;border-radius:0}
+.home-magazine .image-arrow{display:none}
