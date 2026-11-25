@@ -21,7 +21,7 @@ G = {
   secties=[
    ('wat', 'Wat is het theorie-examen?', [
      'Het theorie-examen auto is een computerexamen van het CBR over verkeersregels en verkeerssituaties. Je krijgt 50 vragen die meetellen en je hebt ongeveer 30 minuten. Je slaagt met 44 of meer goede antwoorden.',
-     'Je boekt het examen zelf op de website van het CBR met DigiD, of je rijschool doet dat voor je. Het CBR past het examen soms aan, dus kijk voor je boekt nog even op de actuele examenpagina.']),
+     'Je boekt het examen zelf op de website van het CBR met DigiD. Het CBR past het examen soms aan, dus kijk voor je boekt nog even op de actuele examenpagina.']),
    ('onderwerpen', 'Waar gaan de vragen over?', [
      'Over verkeersregels en situaties onderweg. Theorie B verdeelt dat in negen onderwerpen met samen 225 eigen oefenvragen: gebruik van de weg, voorrang en voor laten gaan, bijzondere wegen en manoeuvres, veilig rijden en noodsituaties, verkeerstekens, verantwoord rijden, wetgeving, voertuigkennis en rijhulpsystemen.']),
    ('oefenen', 'Zo oefen je slim', [
@@ -46,7 +46,7 @@ G = {
   intro='If you are learning to drive in the Netherlands and Dutch is not your first language, you can prepare in English. This page explains what to expect and how to practise. Always check the current rules with the CBR; Theorie B is independent of the CBR.',
   secties=[
    ('english', 'Can I take the exam in English?', [
-     'Yes. The CBR offers the car (category B) theory exam in English as well as in Dutch. You choose the language when you book. You can book the exam yourself on the CBR website with DigiD, or your driving school can book it for you. The English version carries a surcharge.',
+     'Yes. The CBR offers the car (category B) theory exam in English as well as in Dutch. You choose the language when you book. You book the exam yourself on the CBR website with DigiD.',
      'The CBR changes the exam from time to time, so check the current exam page before you book.']),
    ('format', 'What the exam looks like', [
      'The car theory exam is a computer exam about traffic rules and traffic situations. It has 50 questions that count and takes about 30 minutes. You pass with 44 or more correct answers.']),
