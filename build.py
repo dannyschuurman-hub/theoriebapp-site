@@ -13,7 +13,7 @@ T = {
   title="Theorie B: auto theorie-examen oefenen met proefexamen", desc="Oefen voor je theorie-examen auto met Theorie B op je iPhone. Krijg 225 eigen oefenvragen met uitleg. Probeer gratis 10 vragen en je eerste proefexamen.",
   h1="Haal jij 44?", sub="Oefen voor je theorie-examen auto en begrijp waarom een antwoord klopt, met uitleg en bron bij elke vraag.",
   btn="Download in de App Store", chips=["Geen abonnement","Geen reclame","Ook in het Engels"], alt_hero="Theorie B uitslagscherm: 49 van 50 goed, grens van 44 gehaald",
-  secs=[("Oefen met uitleg","225 zelfgeschreven oefenvragen op basis van de Nederlandse verkeerswetten, in 9 onderwerpen met elk 25 vragen. Bij elk antwoord staat uitleg met een wetsverwijzing, zoals RVV 1990, art. 15 lid 1.","nl-02-uitleg.webp","Theorie B toont een goed antwoord met uitleg en bron"),
+  secs=[("Oefen met uitleg","225 zelfgeschreven oefenvragen op basis van de Nederlandse verkeerswetten, in 9 onderwerpen met elk 25 vragen. Bij elk antwoord staat uitleg met de bron erbij, bijvoorbeeld RVV 1990, art. 15 lid 1.","nl-02-uitleg.webp","Theorie B toont een goed antwoord met uitleg en bron"),
         ("Proefexamen in 30 minuten","Doe een proefexamen met 50 vragen in 30 minuten. Je hebt 44 goede antwoorden nodig. Na afloop zie je je uitslag in 50 stippen en je score per onderwerp.","nl-03-proefexamen.webp","Theorie B proefexamen: 50 vragen, 44 goed nodig"),
         ("Nederlands of Engels","Wissel de taal van de hele app of lees per vraag de andere taal.","nl-04-engels.webp","Theorie B in het Nederlands en het Engels"),
         ("225 vragen, 9 onderwerpen","Oefen per onderwerp, in je eigen tempo. Je ziet je voortgang per onderwerp.","nl-05-onderwerpen.webp","Theorie B onderwerpenoverzicht met voortgang")],
@@ -91,6 +91,8 @@ def page(src, out, lang, other_out):
     body = re.search(r'<body><main>(.*)</main></body>', raw, re.S).group(1)
     # strip old brand bar, keep rest of text identical
     body = re.sub(r'<div class="merk">.*?</div>', '', body, count=1, flags=re.S)
+    # 26-11: niet elk antwoord heeft een wetsartikel als bron (91 van 225 niet uit het RVV 1990)
+    body = body.replace('met uitleg en wetsartikel', 'met uitleg en bron').replace('with explanations and references to the law', 'with explanations and sources')
     body = body.replace('href="privacy.html"', 'href="/privacy/"').replace('href="privacy-en.html"', 'href="/en/privacy/"')
     body = body.replace('href="support.html"', 'href="/support/"').replace('href="support-en.html"', 'href="/en/support/"')
     path = "/" + out.replace("index.html","")
