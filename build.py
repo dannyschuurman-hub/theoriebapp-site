@@ -157,17 +157,10 @@ Path('llms.txt').write_text(f"""# Theorie B
 with open("llms.txt", "a") as f:
     f.write(blog.llms(BLOGS, BASE))
 
-# Campagnelinks (21-11): alleen actief als APPLE_PT (provider-token uit App Store Connect) is gezet. Zonder token geen wijziging.
-PT = os.environ.get("APPLE_PT", "")
-if PT:
-    import glob
-    def ct_voor(p):
-        if p.startswith("en/blog/") or p.startswith("en/"): return "site-en-blog" if "/blog/" in "/"+p else "site-en"
-        if p.startswith("blog/"): return "site-nl-blog"
-        if p.startswith(("support","privacy","en/support","en/privacy")): return "site-doc"
-        return "site-nl-home"
-    for p in glob.glob("**/*.html", recursive=True):
-        if p.startswith(("_v2","tests")): continue
-        s = Path(p).read_text(encoding="utf-8"); ct = ct_voor(p)
-        n = re.sub(r'(https://apps\.apple\.com/(?:nl/)?app/id6834047508)(?![?\w])', lambda m: f"{m[1]}?pt={PT}&ct={ct}&mt=8", s)
-        if n != s: Path(p).write_text(n, encoding="utf-8")
+# Campagnelinks (27-11): elke winkelknop (alleen href) krijgt de vaste Apple-code, zodat App Store Connect de site als bron toont.
+MEET = "?pt=129787946&amp;ct=site&amp;mt=8"
+for p in Path(".").glob("**/*.html"):
+    if str(p).startswith(("_v2","tests")): continue
+    s = p.read_text(encoding="utf-8")
+    n = re.sub(r'href="(https://apps\.apple\.com/(?:nl/)?app/id6834047508)(?:\?[^"]*)?"', lambda m: f'href="{m[1]}{MEET}"', s)
+    if n != s: p.write_text(n, encoding="utf-8")
