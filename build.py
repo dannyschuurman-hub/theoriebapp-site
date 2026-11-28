@@ -20,7 +20,7 @@ T = {
   cta_h="Gratis proberen", cta_p="Gratis: één ronde van 10 oefenvragen en je eerste proefexamen, inclusief uitleg, fouten terugkijken en je scorekaart. Met één aankoop krijg je alle 225 vragen en kun je onbeperkt oefenen en proefexamens doen. Geen abonnement of advertenties. Een account of login is niet nodig.",
   price="Prijs in de App Store", privacy_line="Je voortgang blijft op je iPhone. De app verzamelt geen gegevens.",
   foot="Onafhankelijk van het CBR.", suplab="Support", prilab="Privacy", share="/assets/share.jpg", shalt="Theorie B: Haal jij 44? Oefen voor je theorie-examen auto", hero="hero-nl.webp"),
- "en": dict(lang="en", home="/en/", other="/", otherlab="Nederlands", sup="/en/support/", pri="/en/privacy/", badge="appstore-en.svg", store="https://apps.apple.com/app/id6834047508", badgealt="Download on the App Store",
+ "en": dict(lang="en", home="/en/", other="/", otherlab="Nederlands", sup="/en/support/", pri="/en/privacy/", badge="appstore-en.svg", store=STORE, badgealt="Download on the App Store",
   title="Theorie B: Dutch car theory test practice in English", desc="Study for your car theory test with Theorie B on iPhone. Get 225 practice questions with explanations. Try 10 questions and your first mock test free.",
   h1="Can you get 44?", sub="Practise for your Dutch car theory test and understand each answer, with an explanation and a source for every question.",
   btn="Download on the App Store", chips=["No subscription","No ads","Dutch or English"], alt_hero="Theorie B result screen: 49 out of 50 correct, the 44 pass mark reached",
@@ -158,9 +158,10 @@ with open("llms.txt", "a") as f:
     f.write(blog.llms(BLOGS, BASE))
 
 # Campagnelinks (27-11): elke winkelknop (alleen href) krijgt de vaste Apple-code, zodat App Store Connect de site als bron toont.
+# Altijd /nl/ (28-11): zonder landcode geeft Apple in de browser 404, de app staat niet in de Amerikaanse winkel.
 MEET = "?pt=129787946&amp;ct=site&amp;mt=8"
 for p in Path(".").glob("**/*.html"):
     if str(p).startswith(("_v2","tests")): continue
     s = p.read_text(encoding="utf-8")
-    n = re.sub(r'href="(https://apps\.apple\.com/(?:nl/)?app/id6834047508)(?:\?[^"]*)?"', lambda m: f'href="{m[1]}{MEET}"', s)
+    n = re.sub(r'href="https://apps\.apple\.com/(?:nl/)?app/id6834047508(?:\?[^"]*)?"', f'href="{STORE}{MEET}"', s)
     if n != s: p.write_text(n, encoding="utf-8")

@@ -42,7 +42,7 @@ def render(t,path,alt,head,blogs):
    card=re.search(pattern,original)[2]
    card=card.replace('Vraag in het Engels','Question in English').replace('Vraag in het Nederlands','Question in Dutch')
    s=re.sub(pattern,lambda m:m[1]+card,s)
-  s=s.replace('appstore-nl.svg','appstore-en.svg').replace('Download in de App Store','Download on the App Store').replace('https://apps.apple.com/nl/','https://apps.apple.com/')
+  s=s.replace('appstore-nl.svg','appstore-en.svg').replace('Download in de App Store','Download on the App Store')
   s=s.replace('lang="nl"><div class="app-nav"','lang="en"><div class="app-nav"')
   s=s.replace('Vanachter het stuur in de schemering: natte straat, bakstenen huizen, grachtbrug met witte leuningen, brandende lantaarns, geel verkeerslicht en stopstreep.','Driver’s view at dusk: wet street, brick houses, white-railed canal bridge, lit streetlights, amber traffic light and stop line.').replace('Het kruispunt in het blauwe uur.','The junction at dusk.').replace('Taal van de voorbeeldvraag','Language of the sample question')
  cards=''
